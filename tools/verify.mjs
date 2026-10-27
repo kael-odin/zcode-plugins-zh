@@ -148,8 +148,9 @@ check(tiers.manifestsGeneratedRewritten === 0, '5e no generated manifest was rew
 check(tiers.manifestStripped === 0, '5f no hosted MCP server was stripped', `${tiers.manifestStripped} stripped`);
 check(tiers.zcodeListed === zcodeListed.length && tiers.zcodeUnlisted === zcodeUnlisted.length, '5g catalog market counts match', '');
 check(tiers.claudeListed === claudeListed.length, '5h catalog Claude count matches', `${tiers.claudeListed} != ${claudeListed.length}`);
+check(tiers.codexListed === codexListed.length, '5i catalog Codex count matches', `${tiers.codexListed} != ${codexListed.length}`);
 for (const p of catalog.plugins) {
-  if (!names.has(p.name)) { check(false, '5i catalog name exists on disk', p.name); break; }
+  if (!names.has(p.name)) { check(false, '5k catalog name exists on disk', p.name); break; }
 }
 
 // 6 -- README numbers

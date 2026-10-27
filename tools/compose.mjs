@@ -218,7 +218,10 @@ writeJson(path.join(DATA_DIR, 'catalog.json'), {
   total: catalogPlugins.length,
   counts: {
     ...portability.counts,
+    zcodeListed: zcodeListedEntries.length,
+    zcodeUnlisted: zcodeUnlistedEntries.length,
     claudeListed: claudeEntries.length,
+    codexListed: claudeEntries.length,
     claudeExcluded: catalogPlugins.filter((p) => p.claudeExcluded).length,
     zcodeListed: zcodeListedEntries.length,
     zcodeUnlisted: zcodeUnlistedEntries.length,

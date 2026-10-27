@@ -196,7 +196,7 @@ const html = `<!doctype html>
 <section class="install">
   <h2>装之前</h2>
   <p>Claude Code：<code>claude plugin marketplace add kael-odin/zcode-plugins-zh</code>，然后 <code>claude plugin install zcode-github@zcode-plugins-zh</code>。</p>
-  <p>Codex：<code>codex plugin marketplace add https://github.com/kael-odin/zcode-plugins-zh.git</code>。</p>
+  <p>Codex：<code>codex plugin marketplace add https://github.com/kael-odin/zcode-plugins-zh.git</code>，然后 <code>codex plugin add zcode-github@zcode-plugins-zh</code>（装完重开会话）。</p>
   <p class="dim">ZCode 自带官方市场，这个仓库对 ZCode 本身没有增量；它的价值在另外两个 agent 里。</p>
 </section>
 

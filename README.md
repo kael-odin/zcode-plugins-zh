@@ -21,11 +21,13 @@ claude plugin install zcode-github@zcode-plugins-zh
 
 ```bash
 codex plugin marketplace add https://github.com/kael-odin/zcode-plugins-zh.git
+codex plugin add zcode-github@zcode-plugins-zh
+codex plugin list --marketplace zcode-plugins-zh   # 核对
 ```
 
-或打开 **设置 → 插件 → 添加市场**，填入仓库地址。安装后**重开会话**才会加载。
+或打开 **设置 → 插件 → 添加市场**，填入仓库地址。装插件用 **`codex plugin add`**（`install` 是 Claude 的动词）；以后跟进更新用 `codex plugin marketplace upgrade`；装完**重开会话**才生效。
 
-依据 codex-rs 源码（`marketplace.rs`、`plugin_namespace.rs`）：Codex 按 `.agents/plugins/marketplace.json` → `.claude-plugin/marketplace.json` 的顺序探测市场索引，本仓**两份都发**（前者是 Codex 原生格式、探测优先，后者兜底）；插件清单的发现顺序是 `.codex-plugin/plugin.json` → `.claude-plugin/plugin.json` → `.cursor-plugin/plugin.json`，54 个插件目录都带 `.claude-plugin/plugin.json`，无需再生成 `.codex-plugin` 变体。诚实声明：以上契约**读的是 codex-rs 源码，不是在本机 Codex CLI 里实测的**；矩阵那一节的能力判定按 Claude 视角测得，Codex 侧的宿主变量 / 未构建产物限制与文件同源、结论可迁移，hooks 在 Codex 里的行为未逐个实测。
+依据 codex-rs 源码（`marketplace.rs`、`plugin_namespace.rs`）：Codex 按 `.agents/plugins/marketplace.json` → `.claude-plugin/marketplace.json` 的顺序探测市场索引，本仓**两份都发**（前者是 Codex 原生格式、探测优先，后者兜底）；插件清单的发现顺序是 `.codex-plugin/plugin.json` → `.claude-plugin/plugin.json` → `.cursor-plugin/plugin.json`，54 个插件目录都带 `.claude-plugin/plugin.json`，无需再生成 `.codex-plugin` 变体。完整证据与命令面见 [docs/codex-contract.md](docs/codex-contract.md)。诚实声明：以上契约**读的是 codex-rs 源码，不是在本机 Codex CLI 里实测的**；矩阵那一节的能力判定按 Claude 视角测得，Codex 侧的宿主变量 / 未构建产物限制与文件同源、结论可迁移，hooks 在 Codex 里的行为未逐个实测。
 
 **ZCode**
 
@@ -156,7 +158,7 @@ MCP 配置里引用了只有 ZCode 宿主才会展开的变量，换 agent 直�
 | 28 个 `.claude-plugin/plugin.json` | 只补上游缺的那些，**逐字复制** ZCode 清单，不改写任何字段 |
 | `tools/analyze.mjs` | 从 Claude 生效视角给 54 个插件分档，产出 `data/portability.json` |
 | `tools/compose.mjs` | 生成三份市场索引 + 28 份清单 + `data/catalog.json` |
-| `tools/verify.mjs` | 39 项断言，把本文里的每个数字钉在数据上；失败即非零退出 |
+| `tools/verify.mjs` | 40 项断言，把本文里的每个数字钉在数据上；失败即非零退出 |
 | `tools/readme.mjs` | 从 catalog 重渲染上面那张矩阵，防止正文与数据漂移 |
 
 插件源码、上游自带的 26 份 Claude 清单、`LICENSE` 全部**字节未动**。`tools/verify.mjs` 用 git blob 哈希逐文件比对来守住这条线——不是靠人自觉。
@@ -187,6 +189,7 @@ tools/              # sync / analyze / compose / readme / verify
 - **UI 插件跑不起来**：15 个插件的 `dist/` 是构建产物，上游不提交（发布流水线现build），所以它们的 MCP 启动脚本在源码里就不存在。想用就自己 `pnpm install && pnpm build`。
 - **hooks 是 ZCode 专有格式**：`{type:"process", command:"node", args:[…]}`，Claude Code 只认 `{type:"command", command:"bash …"}`。涉及 6 个插件，技能不受影响，hook 不触发。
 - **宿主变量不会展开**：`${ZCODE_PLUGIN_ROOT}` 这类变量只有 ZCode 会替换。
+- **12 份清单的 `skills` 指针缺 `./` 前缀**：`"skills": "skills"`（blender、godot、jupyter-notebook、typst-workbench、unity、unreal-engine、zcode-mcp-app-dev、zotero、excalidraw、kicad、openpencil）和 `"payload/skills"`（mimosa）在 Codex 里会被忽略（它要求 `./` 开头，忽略后按目录约定递归发现技能，通常无损）。这些清单要么是上游自带的 Claude 变体、要么是 ZCode 清单的字节副本，受「源码逐字保留」铁律约束不改写，只在此记录。
 - **UI 插件源码体积**：`ui-plugins/` 是 pnpm workspace，本仓不镜像它的源码目录，只镜像构建后的插件形态（与上游 `plugins/` 一致）。
 
 ## 上游与移除请求

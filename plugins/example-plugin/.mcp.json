@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "example-hello": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${ZCODE_PLUGIN_ROOT}/mcp/hello-server.mjs"
+      ],
+      "env": {
+        "EXAMPLE_GREETING": "${user_config.greeting}"
+      },
+      "enabled": true,
+      "timeoutMs": 30000
+    }
+  }
+}

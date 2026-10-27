@@ -1,0 +1,42 @@
+{
+  "upstream": "https://github.com/zai-org/zcode-plugins.git",
+  "upstreamRepo": "zai-org/zcode-plugins",
+  "upstreamBranch": "main",
+  "license": "Apache-2.0",
+  "owner": {
+    "name": "kael-odin",
+    "url": "https://github.com/kael-odin"
+  },
+  "marketplace": "zcode-plugins-zh",
+  "siteUrl": "https://kael-odin.github.io/zcode-plugins-zh/",
+  "zcodeCategory": "developer-tools",
+  "claudeRenames": {
+    "github": "zcode-github"
+  },
+  "claudeExclude": [
+    "example-plugin"
+  ],
+  "trees": [
+    "plugins",
+    "external_plugins"
+  ],
+  "bundledPlugins": [
+    "android-emulator",
+    "browser-use",
+    "computer-use",
+    "document-skills",
+    "documents",
+    "image-search",
+    "ios-simulator",
+    "node-repl-host",
+    "pdf",
+    "plugin-creator",
+    "presentations",
+    "restore-legacy-sessions",
+    "skill-creator",
+    "spreadsheets",
+    "superpowers",
+    "visualize",
+    "zcode-guide"
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "sha": "d5690038b1e36293ee684a49de12ae41084e25e8",
+  "previousSha": "d5690038b1e36293ee684a49de12ae41084e25e8",
+  "syncedAt": "2026-10-27T11:31:11.154Z",
+  "pluginCount": 54,
+  "added": [],
+  "removed": [],
+  "versionBumps": [],
+  "plugins": [
+    {
+      "name": "accounting-and-reporting",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "alibaba-cloud-cli",
+      "tree": "plugins",
+      "version": "0.1.2"
+    },
+    {
+      "name": "assess-credit",
+      "tree": "plugins",
+      "version": "0.1.2"
+    },
+    {
+      "name": "blender",
+      "tree": "plugins",
+      "version": "0.4.1"
+    },
+    {
+      "name": "cloudbase-skills",
+      "tree": "plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "dingtalk-cli",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "example-plugin",
+      "tree": "plugins",
+      "version": "0.3.0"
+    },
+    {
+      "name": "finance-search",
+      "tree": "plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "find-clients",
+      "tree": "plugins",
+      "version": "0.1.2"
+    },
+    {
+      "name": "github",
+      "tree": "plugins",
+      "version": "0.1.3"
+    },
+    {
+      "name": "gitlab",
+      "tree": "plugins",
+      "version": "0.1.3"
+    },
+    {
+      "name": "godot",
+      "tree": "plugins",
+      "version": "0.4.0"
+    },
+    {
+      "name": "hexin",
+      "tree": "plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "hyper3d-rodin",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "jupyter-notebook",
+      "tree": "plugins",
+      "version": "0.2.0"
+    },
+    {
+      "name": "lark-cli",
+      "tree": "plugins",
+      "version": "0.1.2"
+    },
+    {
+      "name": "libtv-cli",
+      "tree": "plugins",
+      "version": "0.2.0"
+    },
+    {
+      "name": "mimosa",
+      "tree": "plugins",
+      "version": "1.0.4"
+    },
+    {
+      "name": "model-deals",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "obsidian",
+      "tree": "plugins",
+      "version": "0.1.2"
+    },
+    {
+      "name": "pick-funds",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "read-macro",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "run-fpa",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "tencent-meeting-cli",
+      "tree": "plugins",
+      "version": "0.1.3"
+    },
+    {
+      "name": "tianyancha",
+      "tree": "plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "tripo-3d",
+      "tree": "plugins",
+      "version": "0.1.4"
+    },
+    {
+      "name": "typst-workbench",
+      "tree": "plugins",
+      "version": "0.2.0"
+    },
+    {
+      "name": "unity",
+      "tree": "plugins",
+      "version": "0.1.5"
+    },
+    {
+      "name": "unreal-engine",
+      "tree": "plugins",
+      "version": "0.1.3"
+    },
+    {
+      "name": "vet-companies",
+      "tree": "plugins",
+      "version": "0.1.2"
+    },
+    {
+      "name": "video-agent-kit",
+      "tree": "plugins",
+      "version": "0.4.3"
+    },
+    {
+      "name": "video2code",
+      "tree": "plugins",
+      "version": "0.6.1"
+    },
+    {
+      "name": "watch-positions",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "wecom-cli",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "wind",
+      "tree": "plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "write-research",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "zcode-mcp-app-dev",
+      "tree": "plugins",
+      "version": "0.1.1"
+    },
+    {
+      "name": "zotero",
+      "tree": "plugins",
+      "version": "0.2.1"
+    },
+    {
+      "name": "anet",
+      "tree": "external_plugins",
+      "version": "0.1.3"
+    },
+    {
+      "name": "autoresearch",
+      "tree": "external_plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "cadcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "deckcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "designcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "excalidraw",
+      "tree": "external_plugins",
+      "version": "0.3.4"
+    },
+    {
+      "name": "gridcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "jev-decisions",
+      "tree": "external_plugins",
+      "version": "0.1.0"
+    },
+    {
+      "name": "kicad",
+      "tree": "external_plugins",
+      "version": "0.6.1"
+    },
+    {
+      "name": "openpencil",
+      "tree": "external_plugins",
+      "version": "0.3.2"
+    },
+    {
+      "name": "pdfcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "photocraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "ruic-card",
+      "tree": "external_plugins",
+      "version": "1.1.1"
+    },
+    {
+      "name": "soundcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "vectorcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    },
+    {
+      "name": "wordcraft",
+      "tree": "external_plugins",
+      "version": "0.2.4"
+    }
+  ]
+}

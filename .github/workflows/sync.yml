@@ -1,0 +1,63 @@
+name: sync-upstream
+
+on:
+  schedule:
+    - cron: '7 5 * * *' # daily 05:07 UTC = 13:07 Beijing (offset from the sibling repos)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # sync.mjs shallow-clones zai-org/zcode-plugins into .upstream on first
+      # run and re-fetches to the branch tip afterwards. A shallow clone is
+      # enough here: unlike the sibling repos, nothing diffs against an old
+      # SHA -- copied plugin bytes are the whole payload, and verify.mjs
+      # re-reads the same HEAD to prove we did not rewrite them.
+      - name: Mirror upstream payloads
+        run: node tools/sync.mjs
+
+      - name: Classify portability
+        run: node tools/analyze.mjs
+
+      - name: Compose both marketplaces
+        run: node tools/compose.mjs
+
+      # The README's 54-row matrix is generated from data/catalog.json, so it
+      # has to run before verify: verify checks the numbers the README prints,
+      # and a sync that bumps a version but leaves the matrix stale would ship
+      # a README describing the previous release.
+      - name: Render README matrix
+        run: node tools/readme.mjs
+
+      # Every check in verify.mjs is a claim the README or the marketplaces
+      # make. Failure exits non-zero, so a bad sync never reaches the commit
+      # step -- the repo stays on the last verified upstream SHA.
+      - name: Verify (gate)
+        run: node tools/verify.mjs
+
+      - name: Commit and push
+        run: |
+          git config user.name "zcode-plugins-zh-bot"
+          git config user.email "actions@users.noreply.github.com"
+          sha=$(node -p "require('./data/last-sha.json').sha.slice(0,9)")
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no changes since last sync"
+          else
+            git commit -m "sync: upstream ${sha} (verified)"
+            git push
+          fi

@@ -1,0 +1,2454 @@
+{
+  "generatedAt": "2026-10-27T11:31:11.557Z",
+  "upstream": "zai-org/zcode-plugins",
+  "sha": "d5690038b1e36293ee684a49de12ae41084e25e8",
+  "syncedAt": "2026-10-27T11:31:11.154Z",
+  "marketplace": "zcode-plugins-zh",
+  "total": 54,
+  "counts": {
+    "total": 54,
+    "clean": 20,
+    "degraded": 2,
+    "skillsOnly": 9,
+    "blockedHost": 8,
+    "blockedUnbuilt": 15,
+    "portableAfterRewrite": 15,
+    "usableNow": 31,
+    "bundledOnly": 17,
+    "manifestUpstream": 26,
+    "manifestGenerated": 28,
+    "manifestStripped": 0,
+    "claudeListed": 53,
+    "claudeExcluded": 1,
+    "zcodeListed": 52,
+    "zcodeUnlisted": 1,
+    "unlistedUpstream": 1,
+    "manifestsFromUpstream": 26,
+    "manifestsGenerated": 28,
+    "manifestsGeneratedRewritten": 0,
+    "manifestsGeneratedByteCopies": 28
+  },
+  "rules": {
+    "clean": "运行时表面完全不引用 ZCode 专属变量，可直接复制到其它 agent 使用。",
+    "degraded": "核心组件（技能/命令/MCP）可用，但 hooks 或个别脚本写死了 ZCode 专有格式/变量，这层能力会丢失。",
+    "skills-only": "上游的 Claude 清单已经移除了宿主托管 MCP：插件能装、技能能用，靠托管服务提供的数据能力不可用。",
+    "blocked-host": "MCP 服务必须由 ZCode 宿主提供 `${ZCODE_BASE_URL}` 或 ZCode 官方 JWT 才能启动，其它 agent 无法连接。",
+    "blocked-unbuilt": "清单指向的 `dist/` 构建产物未提交到上游，仓库里没有可执行的 server，任何 agent 都跑不起来。",
+    "portableAfterRewrite": "把 `${ZCODE_PLUGIN_ROOT}`/`${ZCODE_PROJECT_DIR}` 逐字替换成 `${CLAUDE_PLUGIN_ROOT}`/`${CLAUDE_PROJECT_DIR}` 后即可用，但需要改动上游字节，本仓库默认不做。"
+  },
+  "plugins": [
+    {
+      "name": "accounting-and-reporting",
+      "claudeName": "accounting-and-reporting",
+      "source": "./plugins/accounting-and-reporting",
+      "category": "finance",
+      "descriptionZh": "【企业财务】核算与报告:月结关账检查与阻断项、总账与明细账勾稽及交易级差异归因、科目映射与重分类、内部管理报表编制、三表勾稽复核",
+      "descriptionEn": "Accounting close and statutory reporting off the company's own ledger: month-end close checks, ledger reconciliation to transaction-level root cause, account mapping for consolidation, and statutory statements delivered as review-ready drafts",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/accounting-reporting/icon.png",
+      "license": null,
+      "keywords": [
+        "accounting",
+        "month-end-close",
+        "reconciliation",
+        "statutory-reporting",
+        "consolidation"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 8,
+        "agents": 1,
+        "commands": 5,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "alibaba-cloud-cli",
+      "claudeName": "alibaba-cloud-cli",
+      "source": "./plugins/alibaba-cloud-cli",
+      "category": "developer-tools",
+      "descriptionZh": "阿里云 CLI 工作流：配置凭证与 profile，并安全执行云资源查询和操作。",
+      "descriptionEn": "Alibaba Cloud CLI workflows for credential setup, profile checks, and safe cloud resource operations.",
+      "version": "0.1.2",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/alibaba-cloud-cli/icon.png",
+      "license": null,
+      "keywords": [
+        "alibaba-cloud",
+        "aliyun",
+        "aliyun-cli",
+        "cloud",
+        "ecs",
+        "oss",
+        "ram"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "anet",
+      "claudeName": "anet",
+      "source": "./external_plugins/anet",
+      "category": "developer-tools",
+      "descriptionZh": "通过本机 AgentNetwork（anet）节点经 A2A 协议把任务交给其他 AI 智能体：发现智能体，发送并跟踪端到端加密的任务，在运营者设定的额度内支付付费技能，并答复其他智能体发给本节点的任务。",
+      "descriptionEn": "Delegate tasks to other AI agents over A2A through a local AgentNetwork (anet) node: find agents, send and track end-to-end encrypted tasks, settle priced skills within operator limits, and answer tasks sent to this node.",
+      "version": "0.1.3",
+      "author": "Agent Network Research",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/anet/icon.png",
+      "license": null,
+      "keywords": [
+        "anet",
+        "agentnetwork",
+        "a2a",
+        "agent-to-agent",
+        "mcp",
+        "x402",
+        "multi-agent"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "MCP 依赖 ZCode 宿主变量启动（anet）"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "anet",
+          "transport": "stdio",
+          "command": "sh",
+          "kind": "host-vars",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "assess-credit",
+      "claudeName": "assess-credit",
+      "source": "./plugins/assess-credit",
+      "category": "finance",
+      "descriptionZh": "【二级市场】固收研究:债券档案与估值、发行主体信用、收益率曲线与信用利差、信用风险跟踪",
+      "descriptionEn": "Fixed-income and credit research: bond profiles with valuation and duration/convexity/spread, issuer credit assessment, yield-curve and credit-spread analysis, and credit-risk watchlists for onshore bonds",
+      "version": "0.1.2",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/fixed-income-research/icon.png",
+      "license": null,
+      "keywords": [
+        "fixed-income",
+        "credit-research",
+        "bonds",
+        "yield-curve",
+        "credit-spread"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 5 个宿主托管 MCP（hexin-bond、wind-bond、wind-economic、tianyancha、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 6,
+        "agents": 1,
+        "commands": 4,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "autoresearch",
+      "claudeName": "autoresearch",
+      "source": "./external_plugins/autoresearch",
+      "category": "developer-tools",
+      "descriptionZh": "ZCode 自主实验循环：设定目标与机械度量，让 agent 迭代。每一轮测量、保留有效改动、回滚无效改动，如此往复。",
+      "descriptionEn": "Autonomous experiment loop for ZCode: set a goal, pick a mechanical metric, and let the agent iterate. It measures, keeps what works, reverts what doesn't, and repeats.",
+      "version": "0.1.0",
+      "author": "luochang212",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/autoresearch/icon.png",
+      "license": null,
+      "keywords": [
+        "autoresearch",
+        "experiment",
+        "optimization",
+        "loop",
+        "benchmark",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "MCP 依赖 ZCode 宿主变量启动（autoresearch）",
+        "hooks 使用 ZCode 专有 `type:\"process\"` + `args` 结构，Claude Code 只认 `type:\"command\"` + 单条命令字符串，这些 hook 不会执行（技能/命令/MCP 不受影响）",
+        "hooks 命令里写死 `${ZCODE_PLUGIN_ROOT}`，其它 agent 不会展开该变量"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 5,
+        "hooks": true,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "autoresearch",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "host-vars",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "blender",
+      "claudeName": "blender",
+      "source": "./plugins/blender",
+      "category": "游戏/3D",
+      "descriptionZh": "引导安装和使用官方 Blender CLI，逐轮打开界面建模，实际看图后调整同一项目。",
+      "descriptionEn": "Use the official Blender CLI to install or locate Blender, model in visible desktop iterations, and inspect images before refining the same project.",
+      "version": "0.4.1",
+      "author": "Z.ai",
+      "homepage": "https://www.blender.org",
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/blender/icon.png",
+      "license": "GPL-3.0-or-later",
+      "keywords": [
+        "blender",
+        "blender-cli",
+        "3d",
+        "render",
+        "bpy",
+        "gltf",
+        "batch",
+        "automation"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "cadcraft",
+      "claudeName": "cadcraft",
+      "source": "./external_plugins/cadcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 CADCraft 进行CAD 绘图，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "CADCraft CAD drafting in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/cadcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "cadcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "cadcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cloudbase-skills",
+      "claudeName": "cloudbase-skills",
+      "source": "./plugins/cloudbase-skills",
+      "category": "developer-tools",
+      "descriptionZh": "腾讯云 CloudBase 开发技能与 MCP 集成，覆盖 Web、微信小程序、数据库、云函数、云托管、云存储和 AI 项目的开发、部署与排障。",
+      "descriptionEn": "CloudBase development skills and MCP integration for building, deploying, and troubleshooting Web, WeChat Mini Program, database, cloud function, CloudRun, storage, and AI projects.",
+      "version": "0.1.0",
+      "author": "TencentCloudBase",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/cloudbase-skills/icon.png",
+      "license": null,
+      "keywords": [
+        "cloudbase",
+        "tencent-cloud",
+        "wechat",
+        "serverless",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "cloudbase",
+          "transport": "stdio",
+          "command": "npx",
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "deckcraft",
+      "claudeName": "deckcraft",
+      "source": "./external_plugins/deckcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 DeckCraft 进行演示文稿，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "DeckCraft presentations in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/deckcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "deckcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "deckcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "designcraft",
+      "claudeName": "designcraft",
+      "source": "./external_plugins/designcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 DesignCraft 进行页面排版，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "DesignCraft page layout in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/designcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "designcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "designcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dingtalk-cli",
+      "claudeName": "dingtalk-cli",
+      "source": "./plugins/dingtalk-cli",
+      "category": "productivity",
+      "descriptionZh": "钉钉 Workspace CLI 工作流：OAuth/设备授权、验证组织账号，并按需安装上游 Skills。",
+      "descriptionEn": "DingTalk Workspace CLI workflows with OAuth/device authorization, profile checks, and optional upstream Skills.",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": "https://github.com/DingTalk-Real-AI/dingtalk-workspace-cli",
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/dingtalk-cli/icon.png",
+      "license": "Apache-2.0",
+      "keywords": [
+        "dingtalk",
+        "dws",
+        "workspace",
+        "chat",
+        "docs",
+        "calendar",
+        "tasks"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "example-plugin",
+      "claudeName": "example-plugin",
+      "source": "./plugins/example-plugin",
+      "category": "developer-tools",
+      "descriptionZh": "一个最小 ZCode 模板插件，演示推荐目录结构（manifest、command、skill、hooks、MCP 样例配置）。新建插件时可直接复制。",
+      "descriptionEn": "A minimal ZCode template plugin demonstrating the recommended structure: manifest, command, skill, hooks, and MCP sample config. Copy it to start a new plugin.",
+      "version": "0.3.0",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": null,
+      "license": null,
+      "keywords": [
+        "template",
+        "example",
+        "starter",
+        "hooks",
+        "mcp"
+      ],
+      "listed": false,
+      "inZcodeMarket": false,
+      "inClaudeMarket": false,
+      "claudeExcluded": true,
+      "tier": "blocked-host",
+      "reasons": [
+        "MCP 依赖 ZCode 宿主变量启动（example-hello）",
+        "hooks 使用 ZCode 专有 `type:\"process\"` + `args` 结构，Claude Code 只认 `type:\"command\"` + 单条命令字符串，这些 hook 不会执行（技能/命令/MCP 不受影响）",
+        "hooks 命令里写死 `${ZCODE_PLUGIN_ROOT}`，其它 agent 不会展开该变量"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 1,
+        "hooks": true,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "example-hello",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "host-vars",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "excalidraw",
+      "claudeName": "excalidraw",
+      "source": "./external_plugins/excalidraw",
+      "category": "productivity",
+      "descriptionZh": "让 Agent 生成图形，在对话侧栏用 Excalidraw 编辑、引用选区、继续修改并导出。",
+      "descriptionEn": "Create and edit diagrams with Excalidraw and MCP tools.",
+      "version": "0.3.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/excalidraw/icon.png",
+      "license": null,
+      "keywords": [],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "excalidraw",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "finance-search",
+      "claudeName": "finance-search",
+      "source": "./plugins/finance-search",
+      "category": "finance",
+      "descriptionZh": "SEC EDGAR 文件检索与财经网页、新闻搜索 MCP 服务。",
+      "descriptionEn": "MCP services for SEC EDGAR filing search and financial web and news search.",
+      "version": "0.1.0",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/finance-search/icon.png",
+      "license": null,
+      "keywords": [
+        "finance-search",
+        "finance",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "2 个 MCP 服务走 `${ZCODE_BASE_URL}` + ZCode 官方 JWT 鉴权（sec-search、finance-search）",
+        "宿主托管 MCP 声明在根目录 `.mcp.json` 里（sec-search、finance-search），删掉它要改上游字节，本仓库不做"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "sec-search",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "finance-search",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "find-clients",
+      "claudeName": "find-clients",
+      "source": "./plugins/find-clients",
+      "category": "finance",
+      "descriptionZh": "【一级市场与银行】对公营销:按区域/产业链/园区筛选目标客户、园区与集群扫描、商机线索、客户全景画像",
+      "descriptionEn": "Corporate-banking client acquisition: prospect screening by region, industry chain, park and cluster, business-opportunity scanning, and full client portraits combining registry, relationships, opportunity signals and risk",
+      "version": "0.1.2",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/corporate-client-acquisition/icon.png",
+      "license": null,
+      "keywords": [
+        "corporate-banking",
+        "prospecting",
+        "client-acquisition",
+        "industry-chain",
+        "kyc"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 3 个宿主托管 MCP（tianyancha、finance-search、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 6,
+        "agents": 1,
+        "commands": 4,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "github",
+      "claudeName": "zcode-github",
+      "source": "./plugins/github",
+      "category": "developer-tools",
+      "descriptionZh": "基于 GitHub CLI 的 GitHub 工作流，覆盖提交、Pull Request、Issue、Release、Actions、仓库、Codespaces 等资源。",
+      "descriptionEn": "GitHub CLI workflows for commits, pull requests, issues, releases, Actions, repositories, Codespaces, and other GitHub resources.",
+      "version": "0.1.3",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/github/icon.png",
+      "license": null,
+      "keywords": [
+        "git",
+        "github",
+        "github-cli",
+        "gh",
+        "pull-request",
+        "issues",
+        "actions",
+        "codespaces"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 10,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "gitlab",
+      "claudeName": "gitlab",
+      "source": "./plugins/gitlab",
+      "category": "developer-tools",
+      "descriptionZh": "基于官方 GitLab CLI 的 Merge Request、Issue、CI/CD、仓库、Release 与 API 工作流。",
+      "descriptionEn": "GitLab CLI workflows based on GitLab's official Agent Skills for merge requests, issues, CI/CD, repositories, releases, and API operations.",
+      "version": "0.1.3",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/gitlab/icon.png",
+      "license": null,
+      "keywords": [
+        "gitlab",
+        "glab",
+        "merge-request",
+        "issue",
+        "ci-cd",
+        "gitlab-api"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 3,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "godot",
+      "claudeName": "godot",
+      "source": "./plugins/godot",
+      "category": "游戏/3D",
+      "descriptionZh": "使用官方 Godot CLI 开发游戏，在原版桌面编辑器中查看每轮场景与运行效果。",
+      "descriptionEn": "Develop games with the official Godot CLI and show each iteration in the original desktop editor.",
+      "version": "0.4.0",
+      "author": "ZCode",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/godot/icon.png",
+      "license": null,
+      "keywords": [
+        "godot",
+        "godot-cli",
+        "game",
+        "3d",
+        "gdscript",
+        "native"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "gridcraft",
+      "claudeName": "gridcraft",
+      "source": "./external_plugins/gridcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 GridCraft 进行电子表格，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "GridCraft spreadsheets in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/gridcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "gridcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "gridcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "hexin",
+      "claudeName": "hexin",
+      "source": "./plugins/hexin",
+      "category": "finance",
+      "descriptionZh": "同花顺股票、海外股票、指数、基金与债券数据 MCP 服务。",
+      "descriptionEn": "MCP services for RoyalFlush iFinD stock, global stock, index, fund, and bond data.",
+      "version": "0.1.0",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/hexin/icon.png",
+      "license": null,
+      "keywords": [
+        "hexin",
+        "finance",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "5 个 MCP 服务走 `${ZCODE_BASE_URL}` + ZCode 官方 JWT 鉴权（hexin-stock、hexin-global-stock、hexin-index、hexin-fund、hexin-bond）",
+        "宿主托管 MCP 声明在根目录 `.mcp.json` 里（hexin-stock、hexin-global-stock、hexin-index、hexin-fund、hexin-bond），删掉它要改上游字节，本仓库不做"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "hexin-stock",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "hexin-global-stock",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "hexin-index",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "hexin-fund",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "hexin-bond",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "hyper3d-rodin",
+      "claudeName": "hyper3d-rodin",
+      "source": "./plugins/hyper3d-rodin",
+      "category": "游戏/3D",
+      "descriptionZh": "将文字或参考图片生成 3D 模型，把生成的模型拆分为独立部件，并下载到项目中使用。",
+      "descriptionEn": "Turn text or reference images into 3D models, split generated models into parts, and download assets for your project.",
+      "version": "0.1.1",
+      "author": "Deemos",
+      "homepage": "https://hyper3d.ai",
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/hyper3d-rodin/icon.png",
+      "license": "MIT",
+      "keywords": [
+        "hyper3d",
+        "rodin",
+        "3d",
+        "text-to-3d",
+        "image-to-3d",
+        "bang",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "hyper3d-rodin",
+          "transport": "http",
+          "command": null,
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "jev-decisions",
+      "claudeName": "jev-decisions",
+      "source": "./external_plugins/jev-decisions",
+      "category": "developer-tools",
+      "descriptionZh": "通过社区版 jev-mcp 服务为 ZCode 智能体提供校准判断工具：对照证据核实结论、筛查不可信文本、批量分类、多候选择优、任务完成门禁。内置一个 Skill，教会智能体何时应调用判断工具而不是直接凭阅读作答。",
+      "descriptionEn": "Calibrated judgment tools for ZCode agents via the community jev-mcp server: verify claims against evidence, screen untrusted text, classify, decide, and gate task completion. Ships a skill that teaches when to reach for a judgment tool instead of answering directly.",
+      "version": "0.1.0",
+      "author": "kittimzhe",
+      "homepage": null,
+      "icon": null,
+      "license": null,
+      "keywords": [
+        "jev",
+        "judgment",
+        "decision",
+        "guardrails",
+        "mcp",
+        "verification"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "jev",
+          "transport": "stdio",
+          "command": "npx",
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "jupyter-notebook",
+      "claudeName": "jupyter-notebook",
+      "source": "./plugins/jupyter-notebook",
+      "category": "developer-tools",
+      "descriptionZh": "在对话侧栏打开 Jupyter Notebook：连接已有的 Jupyter Server 或为工作区启动一个，Agent 与用户一起编辑和运行 cell。",
+      "descriptionEn": "Work on Jupyter notebooks in a side panel: connect to a running Jupyter Server or start one for the workspace, and edit and run cells together with the agent.",
+      "version": "0.2.0",
+      "author": "ZCode",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/jupyter-notebook/icon.png",
+      "license": null,
+      "keywords": [],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "jupyter-notebook",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "kicad",
+      "claudeName": "kicad",
+      "source": "./external_plugins/kicad",
+      "category": "developer-tools",
+      "descriptionZh": "把 KiCad 10 嵌入对话：Agent 用电路 spec 设计双层板（真实 KiCad 库、自动布线、DRC、Gerber/BOM/贴片坐标），侧栏面板显示 3D 渲染和 DRC 结论；一键在真实的 KiCad PCB Editor 里继续编辑，保存后自动同步回对话。",
+      "descriptionEn": "KiCad 10 inside the conversation: agents design 2-layer boards from a circuit spec (real KiCad libraries, auto-route, DRC, Gerber/BOM/CPL); the side panel shows the 3D render and DRC verdict; one click opens the board in the real KiCad PCB Editor and every save syncs back.",
+      "version": "0.6.1",
+      "author": "冯小平",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/kicad/icon.png",
+      "license": null,
+      "keywords": [
+        "kicad",
+        "pcb",
+        "electronics",
+        "hardware",
+        "ui"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "kicad",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "lark-cli",
+      "claudeName": "lark-cli",
+      "source": "./plugins/lark-cli",
+      "category": "productivity",
+      "descriptionZh": "Lark CLI 工作流：覆盖文档、表格、多维表格、日历、消息等 SaaS 资源，并引导应用配置与 OAuth 登录。",
+      "descriptionEn": "Lark CLI workflows for docs, sheets, Base, calendar, messaging, and other SaaS resources with guided setup and OAuth login.",
+      "version": "0.1.2",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/lark-cli/icon.png",
+      "license": null,
+      "keywords": [
+        "feishu",
+        "lark",
+        "lark-cli",
+        "docs",
+        "sheets",
+        "base",
+        "calendar",
+        "messaging"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "libtv-cli",
+      "claudeName": "libtv-cli",
+      "source": "./plugins/libtv-cli",
+      "category": "productivity",
+      "descriptionZh": "LibTV 官方 CLI 技能，支持视频创作画布、工作区、节点、模型、素材上传与生成工作流。",
+      "descriptionEn": "Official LibTV CLI skill for video creation canvases, workspaces, nodes, models, uploads, and generation workflows.",
+      "version": "0.2.0",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/libtv-cli/icon.png",
+      "license": null,
+      "keywords": [
+        "libtv-cli",
+        "cli",
+        "skills"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "mimosa",
+      "claudeName": "mimosa",
+      "source": "./plugins/mimosa",
+      "category": "developer-tools",
+      "descriptionZh": "面向 ZCode 的本地优先代码安全防线，提供写入前 Hook、任务收尾复查、Git 门禁、命令、安全扫描 Skill，以及用于密封深扫的可选 MCP 服务。",
+      "descriptionEn": "Local-first security guardrails for ZCode with pre-write hooks, end-of-turn review, Git gates, commands, a security-scan skill, and an optional MCP server for sealed deep scans.",
+      "version": "1.0.4",
+      "author": "Mimosa",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/mimosa/icon.png",
+      "license": null,
+      "keywords": [
+        "security",
+        "code-scanning",
+        "hooks",
+        "mcp",
+        "sdlc"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "MCP 依赖 ZCode 宿主变量启动（mimosa）",
+        "hooks 使用 ZCode 专有 `type:\"process\"` + `args` 结构，Claude Code 只认 `type:\"command\"` + 单条命令字符串，这些 hook 不会执行（技能/命令/MCP 不受影响）",
+        "hooks 命令里写死 `${ZCODE_PLUGIN_ROOT}`，其它 agent 不会展开该变量"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 0,
+        "hooks": true,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "mimosa",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "host-vars",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "model-deals",
+      "claudeName": "model-deals",
+      "source": "./plugins/model-deals",
+      "category": "finance",
+      "descriptionZh": "【一级市场与银行】交易测算:并购增厚/摊薄、资金来源与用途及形式资本结构、可比交易、募投与摊薄",
+      "descriptionEn": "Transaction structuring and modeling: accretion/dilution analysis, sources and uses with pro-forma capital structure, precedent-transaction comps, and capital-raise dilution modeling for M&A, IPO, placements, and rights issues",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/trade-calculator/icon.png",
+      "license": null,
+      "keywords": [
+        "m-and-a",
+        "deal-modeling",
+        "accretion-dilution",
+        "ipo",
+        "capital-structure"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 4 个宿主托管 MCP（hexin-stock、finance-search、wind-stock、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 6,
+        "agents": 1,
+        "commands": 4,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "obsidian",
+      "claudeName": "obsidian",
+      "source": "./plugins/obsidian",
+      "category": "productivity",
+      "descriptionZh": "来自 kepano/obsidian-skills 的 Obsidian 创作技能：Obsidian 风格 Markdown 笔记、Bases 数据库视图、JSON Canvas 白板、Obsidian CLI 库操作、Defuddle 网页正文提取、Knap 模板批量生成笔记；并集成 axtonliu/axton-obsidian-visual-skills 的可视化技能：Mermaid/Excalidraw 图表生成与文本转画布布局。附 setup 技能，检测并安装 Obsidian CLI、defuddle 与 knap。",
+      "descriptionEn": "Obsidian authoring skills from kepano/obsidian-skills: Obsidian Flavored Markdown notes, Bases database views, JSON Canvas boards, vault automation via Obsidian CLI, clean web extraction with Defuddle, and Knap template rendering — plus visualization skills from axtonliu/axton-obsidian-visual-skills: Mermaid and Excalidraw diagram generation and text-to-canvas layout. A setup skill verifies and installs the Obsidian CLI, defuddle, and knap.",
+      "version": "0.1.2",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/obsidian/icon.png",
+      "license": null,
+      "keywords": [
+        "obsidian",
+        "markdown",
+        "bases",
+        "canvas",
+        "notes",
+        "defuddle",
+        "knap",
+        "mermaid",
+        "excalidraw",
+        "visualization"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 9,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "openpencil",
+      "claudeName": "openpencil",
+      "source": "./external_plugins/openpencil",
+      "category": "developer-tools",
+      "descriptionZh": "",
+      "descriptionEn": "",
+      "version": null,
+      "author": null,
+      "homepage": null,
+      "icon": null,
+      "license": null,
+      "keywords": [],
+      "listed": false,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "design",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pdfcraft",
+      "claudeName": "pdfcraft",
+      "source": "./external_plugins/pdfcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 PdfCraft 进行PDF 编辑，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "PdfCraft PDF editing in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/pdfcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "pdfcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "pdfcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "photocraft",
+      "claudeName": "photocraft",
+      "source": "./external_plugins/photocraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 PhotoCraft 进行图片编辑，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "PhotoCraft image editing in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/photocraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "photocraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "photocraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pick-funds",
+      "claudeName": "pick-funds",
+      "source": "./plugins/pick-funds",
+      "category": "finance",
+      "descriptionZh": "【二级市场】基金选品:多条件筛选、基金与经理画像、持仓风格与重合度分析",
+      "descriptionEn": "Fund and fund-manager research: multi-criteria fund screening, fund and manager profiles, holdings and style analysis, and shortlist comparisons for funds, ETFs, and LOFs",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/fund-research/icon.png",
+      "license": null,
+      "keywords": [
+        "funds",
+        "etf",
+        "fund-screening",
+        "manager-research",
+        "holdings-analysis"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 6 个宿主托管 MCP（hexin-fund、hexin-index、hexin-stock、finance-search、wind-fund、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 7,
+        "agents": 1,
+        "commands": 5,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "read-macro",
+      "claudeName": "read-macro",
+      "source": "./plugins/read-macro",
+      "category": "finance",
+      "descriptionZh": "【二级市场】自上而下:宏观仪表盘、指数估值分位与盈利归因、大类资产配置观点、政策与产业规划跟踪",
+      "descriptionEn": "Top-down macro and strategy work: macro dashboards across growth/inflation/liquidity/credit, index valuation percentiles and earnings attribution, cross-asset allocation views, and policy and industrial-plan tracking",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/macro-strategy/icon.png",
+      "license": null,
+      "keywords": [
+        "macro",
+        "strategy",
+        "asset-allocation",
+        "index-valuation",
+        "policy-tracking"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 6 个宿主托管 MCP（hexin-index、hexin-stock、finance-search、wind-index、wind-economic、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 6,
+        "agents": 1,
+        "commands": 4,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "ruic-card",
+      "claudeName": "ruic-card",
+      "source": "./external_plugins/ruic-card",
+      "category": "游戏/3D",
+      "descriptionZh": "全息闪卡生成器：分层画稿 + Blender + Three.js，两条路线——用描述或参考图绘制四层图，或直接把已有照片切成四层（rembg 抠图、可选去水印，附动画渲染与 MP4 / 微信动图交付）。产出可交互的 3D 视差闪卡网页与可编辑的 card.blend 工程。",
+      "descriptionEn": "Holographic collectible-card generator: layered artwork + Blender + Three.js, in two routes - paint the four layers from a description or reference image, or derive them from a photo you already have (rembg cutout, optional watermark removal, animation render and MP4 / WeChat-sized GIF deliverables). Outputs an interactive parallax card website plus an editable card.blend project.",
+      "version": "1.1.1",
+      "author": "liuzhiqiang23",
+      "homepage": null,
+      "icon": null,
+      "license": "MIT",
+      "keywords": [
+        "holographic",
+        "card",
+        "blender",
+        "threejs",
+        "parallax",
+        "creative",
+        "photo",
+        "rembg",
+        "watermark",
+        "video"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "run-fpa",
+      "claudeName": "run-fpa",
+      "source": "./plugins/run-fpa",
+      "category": "finance",
+      "descriptionZh": "【企业财务】财务部与FP&A:管理报表、13周滚动现金流预测、预算差异分析、情景与盈亏平衡、投入决策测算、上市同业对标",
+      "descriptionEn": "Corporate finance and FP&A: management reporting off a closed ledger, rolling cash-flow forecasts, budget-versus-actual variance analysis, scenario and break-even analysis, and peer benchmarking against listed comparables",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/business-analysis/icon.png",
+      "license": null,
+      "keywords": [
+        "fpa",
+        "corporate-finance",
+        "budgeting",
+        "cash-forecast",
+        "management-reporting"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 2 个宿主托管 MCP（hexin-stock、wind-economic）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 10,
+        "agents": 1,
+        "commands": 8,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "soundcraft",
+      "claudeName": "soundcraft",
+      "source": "./external_plugins/soundcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 SoundCraft 进行音频编辑，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "SoundCraft audio editing in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/soundcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "soundcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "soundcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tencent-meeting-cli",
+      "claudeName": "tencent-meeting-cli",
+      "source": "./plugins/tencent-meeting-cli",
+      "category": "productivity",
+      "descriptionZh": "腾讯会议 CLI 工作流：OAuth2 授权、会议管理、录制管理和参会报告查询。",
+      "descriptionEn": "Tencent Meeting CLI workflows with OAuth2 setup, meeting management, recordings, and attendee reports.",
+      "version": "0.1.3",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/tencent-meeting-cli/icon.png",
+      "license": null,
+      "keywords": [
+        "tencent-meeting",
+        "tencentmeeting",
+        "meeting",
+        "cli",
+        "oauth2"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "tianyancha",
+      "claudeName": "tianyancha",
+      "source": "./plugins/tianyancha",
+      "category": "finance",
+      "descriptionZh": "天眼查企业信息查询 MCP 服务。",
+      "descriptionEn": "MCP service for Tianyancha company information queries.",
+      "version": "0.1.0",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/tianyancha/icon.png",
+      "license": null,
+      "keywords": [
+        "tianyancha",
+        "finance",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "1 个 MCP 服务走 `${ZCODE_BASE_URL}` + ZCode 官方 JWT 鉴权（tianyancha）",
+        "宿主托管 MCP 声明在根目录 `.mcp.json` 里（tianyancha），删掉它要改上游字节，本仓库不做"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "tianyancha",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "tripo-3d",
+      "claudeName": "tripo-3d",
+      "source": "./plugins/tripo-3d",
+      "category": "游戏/3D",
+      "descriptionZh": "用文字或图片生成带贴图的 3D 模型，添加骨骼与动画、精简模型面数，导出用于游戏或 3D 打印的素材。需使用 Tripo 国内站账号。",
+      "descriptionEn": "Generate textured 3D models from text or images, add rigging and animation, simplify meshes, and export assets for games or 3D printing. Requires a mainland China Tripo account.",
+      "version": "0.1.4",
+      "author": "VAST",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/tripo-3d/icon.png",
+      "license": null,
+      "keywords": [
+        "3d",
+        "asset-generation",
+        "game-development",
+        "glb",
+        "fbx",
+        "text-to-3d",
+        "image-to-3d",
+        "3d-printing",
+        "rigging",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "degraded",
+      "reasons": [
+        "hooks 使用 ZCode 专有 `type:\"process\"` + `args` 结构，Claude Code 只认 `type:\"command\"` + 单条命令字符串，这些 hook 不会执行（技能/命令/MCP 不受影响）",
+        "hooks 命令里写死 `${ZCODE_PLUGIN_ROOT}`，其它 agent 不会展开该变量",
+        "1 个文件硬编码 ZCode 宿主变量（hooks/hooks.json）"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": true,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "tripo",
+          "transport": "http",
+          "command": null,
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "typst-workbench",
+      "claudeName": "typst-workbench",
+      "source": "./plugins/typst-workbench",
+      "category": "productivity",
+      "descriptionZh": "用你本机的 Typst 在对话侧栏实时预览文档：Agent 改完文件预览即刻更新，查看错误与渲染页面、在预览中标出位置、导出 PDF；你可以选中预览中的文字，连同对应的源码位置发给 Agent。",
+      "descriptionEn": "Live-preview Typst documents in a side panel with the Typst installed on your computer: the preview updates the moment the agent saves a file, the agent checks errors, looks at rendered pages, points at places in the preview and exports PDFs, and you can send selected text to the agent together with its source location.",
+      "version": "0.2.0",
+      "author": "ZCode",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/typst-workbench/icon.png",
+      "license": null,
+      "keywords": [],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "typst",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unity",
+      "claudeName": "unity",
+      "source": "./plugins/unity",
+      "category": "游戏/3D",
+      "descriptionZh": "在 Unity 中搭建游戏场景、编辑物体和资源、编写 C# 脚本，运行并调试游戏原型。",
+      "descriptionEn": "Build game scenes in Unity, edit objects and assets, write C# scripts, and run and debug gameplay prototypes.",
+      "version": "0.1.5",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/unity/icon.png",
+      "license": null,
+      "keywords": [
+        "unity",
+        "game-development",
+        "unity-cli",
+        "skills"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "unreal-engine",
+      "claudeName": "unreal-engine",
+      "source": "./plugins/unreal-engine",
+      "category": "游戏/3D",
+      "descriptionZh": "在 Unreal Engine 中搭建和编辑关卡、调整场景物体，创建与调试蓝图逻辑，制作游戏原型。",
+      "descriptionEn": "Build and edit Unreal Engine levels, adjust scene actors, and create and debug Blueprint logic for game prototypes.",
+      "version": "0.1.3",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/unreal-engine/icon.png",
+      "license": null,
+      "keywords": [
+        "unreal-engine",
+        "ue",
+        "mcp",
+        "game-development"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 3,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "unreal-mcp",
+          "transport": "http",
+          "command": null,
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "vectorcraft",
+      "claudeName": "vectorcraft",
+      "source": "./external_plugins/vectorcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 VectorCraft 进行矢量绘图，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "VectorCraft vector illustration in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/vectorcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "vectorcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "vectorcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vet-companies",
+      "claudeName": "vet-companies",
+      "source": "./plugins/vet-companies",
+      "category": "finance",
+      "descriptionZh": "【一级市场与银行】企业排查:尽调报告、关联方与供应链图谱、失信涉诉质押风险快扫",
+      "descriptionEn": "Counterparty and company due diligence: structured DD reports, related-party and supply-chain mapping, and risk scans (litigation, dishonesty records, pledges, penalties) for Chinese enterprises",
+      "version": "0.1.2",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/corporate-due-diligence/icon.png",
+      "license": null,
+      "keywords": [
+        "due-diligence",
+        "kyc",
+        "risk-screening",
+        "related-parties",
+        "counterparty"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 3 个宿主托管 MCP（tianyancha、hexin-bond、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 5,
+        "agents": 1,
+        "commands": 3,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "video-agent-kit",
+      "claudeName": "video-agent-kit",
+      "source": "./plugins/video-agent-kit",
+      "category": "productivity",
+      "descriptionZh": "自动化视频剪辑工具包: 标准云端语音转录与合成、完整视频抽帧理解、局部复看、时间线、预览渲染、QC 和 TTS。",
+      "descriptionEn": "Automated video editing toolkit: standard cloud speech transcription and synthesis, full video frame extraction and understanding, local re-inspection, timeline, preview rendering, QC, and TTS.",
+      "version": "0.4.3",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/video-agent/icon.png",
+      "license": null,
+      "keywords": [
+        "video-editing",
+        "video-agent",
+        "visual-inspection",
+        "timeline",
+        "ffmpeg"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 5,
+        "agents": 0,
+        "commands": 2,
+        "hooks": true,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "video-edit",
+          "transport": "stdio",
+          "command": "python3",
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "video2code",
+      "claudeName": "video2code",
+      "source": "./plugins/video2code",
+      "category": "productivity",
+      "descriptionZh": "基于 ZCode 内置 Browser Use WebView 录制 WebM 并用 ffmpeg 转成 MP4/URL 复刻；无需 Playwright 或外部 Chromium",
+      "descriptionEn": "Records WebM through ZCode's built-in Browser Use WebView and converts it to MP4 with ffmpeg for video/URL replication; no Playwright or external Chromium required.",
+      "version": "0.6.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/video2code/icon.png",
+      "license": null,
+      "keywords": [
+        "video2code",
+        "replication",
+        "webapp",
+        "motion"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 6,
+        "agents": 0,
+        "commands": 4,
+        "hooks": true,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "runtime",
+          "transport": "stdio",
+          "command": "python3",
+          "kind": "portable",
+          "missing": []
+        },
+        {
+          "name": "video",
+          "transport": "stdio",
+          "command": "python3",
+          "kind": "portable",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "watch-positions",
+      "claudeName": "watch-positions",
+      "source": "./plugins/watch-positions",
+      "category": "finance",
+      "descriptionZh": "【二级市场】持仓跟踪:自选股清单、带异动归因的盘后复盘、持仓事件分级提醒",
+      "descriptionEn": "Watchlist and portfolio monitoring: after-close recaps, position event alerts (announcements, pledges, lockup expiries), and intraday move attribution for A/H/US names",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/portfolio-tracking/icon.png",
+      "license": null,
+      "keywords": [
+        "portfolio-monitoring",
+        "watchlist",
+        "market-recap",
+        "event-alerts",
+        "attribution"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 5 个宿主托管 MCP（hexin-stock、hexin-index、finance-search、wind-stock、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 6,
+        "agents": 1,
+        "commands": 4,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "wecom-cli",
+      "claudeName": "wecom-cli",
+      "source": "./plugins/wecom-cli",
+      "category": "productivity",
+      "descriptionZh": "企业微信 CLI 工作流：覆盖消息、文档、表格、邮件、日历、会议、通讯录和待办，并支持扫码授权与状态检查。",
+      "descriptionEn": "WeCom CLI workflows for messages, docs, sheets, mail, calendar, meetings, contacts, and todos with QR authentication.",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": "https://github.com/WecomTeam/wecom-cli",
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/wecom-cli/icon.png",
+      "license": "MIT",
+      "keywords": [
+        "wecom",
+        "wechat-work",
+        "wecom-cli",
+        "message",
+        "docs",
+        "sheets",
+        "calendar",
+        "todo"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "clean",
+      "reasons": [],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 2,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "wind",
+      "claudeName": "wind",
+      "source": "./plugins/wind",
+      "category": "finance",
+      "descriptionZh": "万得股票、海外股票、指数、基金、债券、宏观经济与公告研报数据 MCP 服务。",
+      "descriptionEn": "MCP services for Wind stock, global stock, index, fund, bond, economic, and document data.",
+      "version": "0.1.0",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/wind/icon.png",
+      "license": null,
+      "keywords": [
+        "wind",
+        "finance",
+        "mcp"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-host",
+      "reasons": [
+        "7 个 MCP 服务走 `${ZCODE_BASE_URL}` + ZCode 官方 JWT 鉴权（wind-stock、wind-index、wind-fund、wind-bond、wind-economic、wind-docs、wind-global-stock）",
+        "宿主托管 MCP 声明在根目录 `.mcp.json` 里（wind-stock、wind-index、wind-fund、wind-bond、wind-economic、wind-docs、wind-global-stock），删掉它要改上游字节，本仓库不做"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": [
+        {
+          "name": "wind-stock",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "wind-index",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "wind-fund",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "wind-bond",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "wind-economic",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "wind-docs",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        },
+        {
+          "name": "wind-global-stock",
+          "transport": "http",
+          "command": null,
+          "kind": "hosted",
+          "missing": []
+        }
+      ]
+    },
+    {
+      "name": "wordcraft",
+      "claudeName": "wordcraft",
+      "source": "./external_plugins/wordcraft",
+      "category": "productivity",
+      "descriptionZh": "在 ZCode 面板中使用 WordCraft 进行文字处理，支持打开工作区文件和通过宿主保存导出。",
+      "descriptionEn": "WordCraft word processing in a ZCode panel, with workspace file opening and host-mediated exports.",
+      "version": "0.2.4",
+      "author": "zcoder",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/wordcraft/icon.png",
+      "license": null,
+      "keywords": [
+        "artcraft",
+        "wasm",
+        "ui-plugin",
+        "wordcraft"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 0,
+        "agents": 0,
+        "commands": 1,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "wordcraft",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "write-research",
+      "claudeName": "write-research",
+      "source": "./plugins/write-research",
+      "category": "finance",
+      "descriptionZh": "【二级市场】研究产出:深度研报、行业分析、财报点评、DCF/LBO/三表估值模型",
+      "descriptionEn": "End-to-end investment research reports, sector analysis, earnings updates, and valuation models",
+      "version": "0.1.1",
+      "author": "Z.ai",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/equity-research/icon.png",
+      "license": null,
+      "keywords": [
+        "equity-research",
+        "valuation",
+        "dcf",
+        "lbo",
+        "earnings"
+      ],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "skills-only",
+      "reasons": [
+        "ZCode 版靠 8 个宿主托管 MCP（sec-search、hexin-stock、hexin-global-stock、hexin-index、wind-stock、finance-search、wind-economic、wind-docs）提供数据，上游自带的 Claude 变体已把这层移除：技能照常可用，托管数据能力不可用"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "upstream",
+      "components": {
+        "declared": [],
+        "skills": 17,
+        "agents": 1,
+        "commands": 13,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "zcode-mcp-app-dev",
+      "claudeName": "zcode-mcp-app-dev",
+      "source": "./plugins/zcode-mcp-app-dev",
+      "category": "developer-tools",
+      "descriptionZh": "使用官方 SDK 开发 ZCode MCP App，附宿主扩展约定与独立构建指引。",
+      "descriptionEn": "Develop MCP Apps for ZCode with official SDKs and a small host-extension reference.",
+      "version": "0.1.1",
+      "author": "ZCode",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/zcode-mcp-app-dev/icon.png",
+      "license": null,
+      "keywords": [],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "degraded",
+      "reasons": [
+        "1 个文件硬编码 ZCode 宿主变量（skills/developing-mcp-apps/references/zcode-host.md）"
+      ],
+      "portableAfterRewrite": true,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": false
+      },
+      "mcpServers": []
+    },
+    {
+      "name": "zotero",
+      "claudeName": "zotero",
+      "source": "./plugins/zotero",
+      "category": "productivity",
+      "descriptionZh": "在对话侧栏使用你的 Zotero 文库：搜索与阅读论文和你的高亮，Agent 在 PDF 中标出依据、生成引用与 .bib 文件，并可导入论文、写笔记、整理分类。",
+      "descriptionEn": "Work with your Zotero library in a side panel: search and read papers and your highlights, let the agent highlight evidence in PDFs, cite and keep a .bib file, and import papers, write notes and organise collections.",
+      "version": "0.2.1",
+      "author": "ZCode",
+      "homepage": null,
+      "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/zotero/icon.png",
+      "license": null,
+      "keywords": [],
+      "listed": true,
+      "inZcodeMarket": true,
+      "inClaudeMarket": true,
+      "claudeExcluded": false,
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "MCP 启动脚本不存在：dist/server.mjs（上游未提交构建产物）"
+      ],
+      "portableAfterRewrite": false,
+      "claudeManifest": "generated",
+      "components": {
+        "declared": [],
+        "skills": 1,
+        "agents": 0,
+        "commands": 0,
+        "hooks": false,
+        "ui": true
+      },
+      "mcpServers": [
+        {
+          "name": "zotero",
+          "transport": "stdio",
+          "command": "node",
+          "kind": "unbuilt",
+          "missing": [
+            "dist/server.mjs"
+          ]
+        }
+      ]
+    }
+  ]
+}

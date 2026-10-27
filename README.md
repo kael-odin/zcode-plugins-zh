@@ -39,11 +39,11 @@ ZCode 自带官方市场，这些插件本来就在里面，装本仓没有额�
 
 <!-- matrix:begin -->
 
-**54 个插件 = 18 个直接可用 / 2 个降级可用 / 9 个仅技能可用 / 8 个受阻于宿主 / 17 个受阻于未构建**
+**54 个插件 = 20 个直接可用 / 2 个降级可用 / 9 个仅技能可用 / 8 个受阻于宿主 / 15 个受阻于未构建**
 
-口径：`18 / 2 / 9 / 8 / 17`　·　Claude 清单：26 个由上游自带，28 个由本仓库按 ZCode 清单逐字生成（改写 0 个、剥离托管 MCP 0 个）。
+口径：`20 / 2 / 9 / 8 / 15`　·　Claude 清单：26 个由上游自带，28 个由本仓库按 ZCode 清单逐字生成（改写 0 个、剥离托管 MCP 0 个）。
 
-### ✅ 直接可用（18）
+### ✅ 直接可用（20）
 
 装进 Claude Code / Codex 后行为与 ZCode 下一致：技能、命令、代理、可移植 MCP 全在。
 
@@ -66,6 +66,8 @@ ZCode 自带官方市场，这些插件本来就在里面，装本仓没有额�
 | [`tencent-meeting-cli`](plugins/tencent-meeting-cli) | 2 | · | · | · | — |
 | [`unity`](plugins/unity) | 2 | · | · | · | — |
 | [`unreal-engine`](plugins/unreal-engine) | 3 | · | · | `unreal-mcp` (http) | — |
+| [`video-agent-kit`](plugins/video-agent-kit) | 5 | 2 | · | `video-edit` (stdio) | — |
+| [`video2code`](plugins/video2code) | 6 | 4 | · | `runtime` (stdio)<br>`video` (stdio) | — |
 | [`wecom-cli`](plugins/wecom-cli) | 2 | · | · | · | — |
 
 ### ⚠️ 部分可用（11）
@@ -97,7 +99,7 @@ ZCode 自带官方市场，这些插件本来就在里面，装本仓没有额�
 | [`watch-positions`](plugins/watch-positions) | 6 | 4 | 1 | · | 技能可用；宿主托管 MCP 不可用 |
 | [`write-research`](plugins/write-research) | 17 | 13 | 1 | · | 技能可用；宿主托管 MCP 不可用 |
 
-### ❌ 装了也没用（25）
+### ❌ 装了也没用（23）
 
 仍然收录（源码逐字保留，方便你对照阅读或自己补环境），但不建议装进非 ZCode 的 agent。合计 = 8 个受阻于宿主 + 15 个受阻于未构建。
 
@@ -116,7 +118,7 @@ MCP 配置里引用了只有 ZCode 宿主才会展开的变量，换 agent 直�
 | [`tianyancha`](plugins/tianyancha) | · | · | · | `tianyancha` (http) | MCP `tianyancha` 依赖 ZCode 宿主变量，其它 agent 起不来 |
 | [`wind`](plugins/wind) | · | · | · | `wind-stock` (http)<br>`wind-index` (http)<br>`wind-fund` (http)<br>`wind-bond` (http)<br>`wind-economic` (http)<br>`wind-docs` (http)<br>`wind-global-stock` (http) | MCP `wind-stock、wind-index、wind-fund、wind-bond、wind-economic、wind-docs、wind-global-stock` 依赖 ZCode 宿主变量，其它 agent 起不来 |
 
-#### 受阻于未构建（17）
+#### 受阻于未构建（15）
 
 上游把 `ui-plugins/` 当 pnpm workspace 管理却没提交 `dist/`，MCP 入口文件缺失。
 
@@ -135,8 +137,6 @@ MCP 配置里引用了只有 ZCode 宿主才会展开的变量，换 agent 直�
 | [`soundcraft`](external_plugins/soundcraft) | · | 1 | · | `soundcraft` (stdio) | 缺上游未提交的构建产物 `dist/server.mjs` |
 | [`typst-workbench`](plugins/typst-workbench) | 1 | · | · | `typst` (stdio) | 缺上游未提交的构建产物 `dist/server.mjs` |
 | [`vectorcraft`](external_plugins/vectorcraft) | · | 1 | · | `vectorcraft` (stdio) | 缺上游未提交的构建产物 `dist/server.mjs` |
-| [`video-agent-kit`](plugins/video-agent-kit) | 5 | 2 | · | `video-edit` (stdio) | 缺上游未提交的构建产物 |
-| [`video2code`](plugins/video2code) | 6 | 4 | · | `runtime` (stdio)<br>`video` (stdio) | 缺上游未提交的构建产物 |
 | [`wordcraft`](external_plugins/wordcraft) | · | 1 | · | `wordcraft` (stdio) | 缺上游未提交的构建产物 `dist/server.mjs` |
 | [`zotero`](plugins/zotero) | 1 | · | · | `zotero` (stdio) | 缺上游未提交的构建产物 `dist/server.mjs` |
 

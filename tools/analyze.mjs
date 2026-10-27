@@ -10,8 +10,17 @@ const cfg = loadConfig();
 const lastSha = readJson(path.join(DATA_DIR, 'last-sha.json'), { sha: 'unknown', syncedAt: null });
 
 const ZCODE_VAR = /\$\{(ZCODE_[A-Z_]+)\}/g;
-const ROOT_REF = /\$\{(?:ZCODE|CLAUDE)_PLUGIN_ROOT\}\/([^"'\s,)]+)/g;
+// The backslash is excluded from the capture class on purpose: a ref that sits
+// inside a JSON string ends at `\"`, and without this the captured path keeps
+// that backslash. Windows' existsSync silently tolerates it, Linux does not, so
+// the same tree used to classify differently on CI than on a developer box.
+const ROOT_REF = /\$\{(?:ZCODE|CLAUDE)_PLUGIN_ROOT\}\/([^"'\s,)\\]*)/g;
 const TEXT_EXT = /\.(json|md|mdx|mjs|cjs|js|ts|sh|py|yaml|yml|toml)$/;
+
+/** Ref paths are repo-relative and forward-slashed regardless of captured form. */
+function refRel(m) {
+  return m[1].replace(/[.,;:]+$/, '').replace(/\\/g, '/');
+}
 
 function classifyServer(server, dir) {
   const text = JSON.stringify(server);
@@ -19,7 +28,7 @@ function classifyServer(server, dir) {
   if (server.url && /\$\{ZCODE_BASE_URL\}/.test(server.url)) return { kind: 'hosted', missing: [] };
   if (server.auth?.type === 'zcode_official') return { kind: 'hosted', missing: [] };
   for (const m of text.matchAll(ROOT_REF)) {
-    const rel = m[1].replace(/[.,;:]+$/, '');
+    const rel = refRel(m);
     if (!fs.existsSync(path.join(dir, rel))) unreachable.push(rel);
   }
   if (unreachable.length) return { kind: 'unbuilt', missing: unreachable };
@@ -110,7 +119,7 @@ for (const { name, tree, dir } of pluginDirs(ROOT, cfg.trees)) {
     let hookZcodeFormat = false;
     for (const hook of hooks) {
       for (const m of hook.text.matchAll(ROOT_REF)) {
-        const rel = m[1].replace(/[.,;:]+$/, '');
+        const rel = refRel(m);
         if (!fs.existsSync(path.join(dir, rel))) hookMissing.push(rel);
       }
       if (/\$\{ZCODE_[A-Z_]+\}/.test(hook.text)) hookNeedsHost = true;

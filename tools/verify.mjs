@@ -16,6 +16,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { ROOT, UPSTREAM_DIR, DATA_DIR, loadConfig, readJson, sha256File, pluginDirs, hasGit, git } from './lib.mjs';
 
 const cfg = loadConfig();
@@ -165,6 +166,49 @@ if (hasGit(ROOT)) {
 check(!fs.existsSync(path.join(ROOT, 'claude-marketplace.schema.json')), '7c no stray schema dump at repo root');
 check(fs.existsSync(path.join(ROOT, 'LICENSE')), '7d LICENSE present');
 check(fs.existsSync(path.join(ROOT, 'NOTICE.md')), '7e NOTICE.md present');
+const attrs = fs.existsSync(path.join(ROOT, '.gitattributes'))
+  ? fs.readFileSync(path.join(ROOT, '.gitattributes'), 'utf8') : '';
+check(/^\*\s+-text\s*$/m.test(attrs), '7f .gitattributes disables EOL rewrite (a clone must stay byte-identical)');
+
+// 7g -- the real promise of this repo: mirrored bytes == upstream bytes. Checked
+// against the upstream commit's blob ids, so a CRLF checkout or a stray edit to a
+// mirrored file cannot pass. Skips only when .upstream is absent (verify-only runs).
+if (hasGit(UPSTREAM_DIR)) {
+  const blobSha = (buf) => crypto.createHash('sha1').update(`blob ${buf.length}\0`).update(buf).digest('hex');
+  const upstream = new Map();
+  for (const line of git(UPSTREAM_DIR, 'ls-tree', '-r', 'HEAD').split('\n')) {
+    const m = line.match(/^\d+ blob ([0-9a-f]+)\t(.+)$/);
+    if (m) upstream.set(m[2], m[1]);
+  }
+  const walk = (abs, rel) => fs.readdirSync(abs, { withFileTypes: true }).flatMap((e) => {
+    const childAbs = path.join(abs, e.name);
+    const childRel = `${rel}/${e.name}`;
+    return e.isDirectory() ? walk(childAbs, childRel) : [childRel];
+  });
+  const drifted = [];
+  let compared = 0;
+  for (const tree of cfg.trees) {
+    const dir = path.join(ROOT, tree);
+    if (!fs.existsSync(dir)) continue;
+    for (const rel of walk(dir, tree)) {
+      const want = upstream.get(rel);
+      if (!want) continue; // generated files (e.g. the 28 claude manifests) are not upstream
+      compared++;
+      if (blobSha(fs.readFileSync(path.join(ROOT, rel))) !== want) drifted.push(rel);
+    }
+  }
+  check(compared > 0 && drifted.length === 0, `7g ${compared} mirrored files byte-identical to upstream`,
+    drifted.slice(0, 5).join(', '));
+} else {
+  notes.push('7g .upstream absent -- byte-identity check skipped');
+}
+
+// 7h -- path extraction must be platform-neutral. A captured ref that still holds
+// a backslash resolves on Windows and fails on Linux, which silently produced two
+// different tier counts for the same tree.
+const backslashRefs = (portability.plugins ?? []).flatMap((p) =>
+  (p.reasons ?? []).filter((r) => /[A-Za-z0-9_.-]\\/.test(r)).map((r) => `${p.name}: ${r}`));
+check(backslashRefs.length === 0, '7h no reason string carries a backslash path', backslashRefs.slice(0, 3).join(' | '));
 
 // 8 -- the two hand-picked decisions
 const gh = claudeListed.find((e) => e.name === 'zcode-github');

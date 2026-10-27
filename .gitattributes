@@ -1,0 +1,9 @@
+# 逐字节保真。Git for Windows 安装时默认 core.autocrlf=true，会把检出时的每个
+# LF 改写成 CRLF —— 那样别人克隆到的插件源码就和上游不是同一份字节了。`-text`
+# 关掉这条转换，读写都按原样。注意副作用：`git add` 也不再归一化，所以写入仓库
+# 的字节必须本来就是对的（tools/sync.mjs 会逐文件校验上游 blob）。
+* -text
+
+# 镜像进来的插件源码不计入本仓库的语言统计，否则语言栏显示的是上游的代码。
+plugins/** linguist-vendored
+external_plugins/** linguist-vendored

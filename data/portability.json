@@ -1,16 +1,16 @@
 {
   "upstream": "zai-org/zcode-plugins",
   "sha": "d5690038b1e36293ee684a49de12ae41084e25e8",
-  "syncedAt": "2026-10-27T11:31:11.154Z",
+  "syncedAt": "2026-10-27T11:41:21.881Z",
   "counts": {
     "total": 54,
-    "clean": 20,
+    "clean": 18,
     "degraded": 2,
     "skillsOnly": 9,
     "blockedHost": 8,
-    "blockedUnbuilt": 15,
-    "portableAfterRewrite": 15,
-    "usableNow": 31,
+    "blockedUnbuilt": 17,
+    "portableAfterRewrite": 17,
+    "usableNow": 29,
     "bundledOnly": 17,
     "manifestUpstream": 26,
     "manifestGenerated": 28,
@@ -2070,9 +2070,11 @@
       "descriptionEn": "Automated video editing toolkit: standard cloud speech transcription and synthesis, full video frame extraction and understanding, local re-inspection, timeline, preview rendering, QC, and TTS.",
       "category": null,
       "requiresPaidPlan": false,
-      "tier": "clean",
+      "tier": "blocked-unbuilt",
       "portableAfterRewrite": true,
-      "reasons": [],
+      "reasons": [
+        "hooks 引用的脚本不存在：hooks/env_check.py\\、hooks/check_video_input.py\\、hooks/check_closeout.py\\（上游未提交构建产物）"
+      ],
       "claude": {
         "source": "upstream",
         "identical": false,
@@ -2100,7 +2102,11 @@
         ],
         "zcodeProcessType": false,
         "needsHost": false,
-        "missing": []
+        "missing": [
+          "hooks/env_check.py\\",
+          "hooks/check_video_input.py\\",
+          "hooks/check_closeout.py\\"
+        ]
       },
       "mcpServers": [
         {
@@ -2124,9 +2130,11 @@
       "descriptionEn": "Records WebM through ZCode's built-in Browser Use WebView and converts it to MP4 with ffmpeg for video/URL replication; no Playwright or external Chromium required.",
       "category": null,
       "requiresPaidPlan": false,
-      "tier": "clean",
+      "tier": "blocked-unbuilt",
       "portableAfterRewrite": true,
-      "reasons": [],
+      "reasons": [
+        "hooks 引用的脚本不存在：hooks/env_check.py\\、hooks/check_video_input.py\\、hooks/check_url_input.py\\、hooks/check_plan_first.py\\、hooks/check_closeout.py\\（上游未提交构建产物）"
+      ],
       "claude": {
         "source": "upstream",
         "identical": true,
@@ -2156,7 +2164,13 @@
         ],
         "zcodeProcessType": false,
         "needsHost": false,
-        "missing": []
+        "missing": [
+          "hooks/env_check.py\\",
+          "hooks/check_video_input.py\\",
+          "hooks/check_url_input.py\\",
+          "hooks/check_plan_first.py\\",
+          "hooks/check_closeout.py\\"
+        ]
       },
       "mcpServers": [
         {

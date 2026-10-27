@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-10-27T11:31:11.557Z",
+  "generatedAt": "2026-10-27T11:41:22.150Z",
   "upstream": "zai-org/zcode-plugins",
   "sha": "d5690038b1e36293ee684a49de12ae41084e25e8",
-  "syncedAt": "2026-10-27T11:31:11.154Z",
+  "syncedAt": "2026-10-27T11:41:21.881Z",
   "marketplace": "zcode-plugins-zh",
   "total": 54,
   "counts": {
     "total": 54,
-    "clean": 20,
+    "clean": 18,
     "degraded": 2,
     "skillsOnly": 9,
     "blockedHost": 8,
-    "blockedUnbuilt": 15,
-    "portableAfterRewrite": 15,
-    "usableNow": 31,
+    "blockedUnbuilt": 17,
+    "portableAfterRewrite": 17,
+    "usableNow": 29,
     "bundledOnly": 17,
     "manifestUpstream": 26,
     "manifestGenerated": 28,
@@ -2047,8 +2047,10 @@
       "inZcodeMarket": true,
       "inClaudeMarket": true,
       "claudeExcluded": false,
-      "tier": "clean",
-      "reasons": [],
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "hooks 引用的脚本不存在：hooks/env_check.py\\、hooks/check_video_input.py\\、hooks/check_closeout.py\\（上游未提交构建产物）"
+      ],
       "portableAfterRewrite": true,
       "claudeManifest": "upstream",
       "components": {
@@ -2091,8 +2093,10 @@
       "inZcodeMarket": true,
       "inClaudeMarket": true,
       "claudeExcluded": false,
-      "tier": "clean",
-      "reasons": [],
+      "tier": "blocked-unbuilt",
+      "reasons": [
+        "hooks 引用的脚本不存在：hooks/env_check.py\\、hooks/check_video_input.py\\、hooks/check_url_input.py\\、hooks/check_plan_first.py\\、hooks/check_closeout.py\\（上游未提交构建产物）"
+      ],
       "portableAfterRewrite": true,
       "claudeManifest": "upstream",
       "components": {

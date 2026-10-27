@@ -46,7 +46,13 @@ jobs:
       # Every check in verify.mjs is a claim the README or the marketplaces
       # make. Failure exits non-zero, so a bad sync never reaches the commit
       # step -- the repo stays on the last verified upstream SHA.
+      # VERIFY_VERBOSE is load-bearing: a passing check prints nothing, so the
+      # 7i exec-bit assertion and its win32/missing-.upstream skip branches are
+      # indistinguishable in the log without it. On a green run this is the only
+      # record that the mode check ran at all instead of silently skipping.
       - name: Verify (gate)
+        env:
+          VERIFY_VERBOSE: '1'
         run: node tools/verify.mjs
 
       - name: Commit and push

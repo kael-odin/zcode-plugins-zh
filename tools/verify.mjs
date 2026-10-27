@@ -229,7 +229,11 @@ if (hasGit(UPSTREAM_DIR) && process.platform !== 'win32') {
     if (!fs.existsSync(abs)) return false; // absence is 7g's finding, not this one
     return !(fs.statSync(abs).mode & 0o111);
   });
-  check(notExec.length === 0, `7i ${execInTrees.length} upstream executables keep their +x`, notExec.slice(0, 5).join(', '));
+  // `> 0` is not decoration: a mode-blind read of ls-tree returns an empty set and
+  // this check would then pass while verifying nothing, which is the exact failure
+  // mode it exists to catch.
+  check(execInTrees.length > 0 && notExec.length === 0,
+    `7i ${execInTrees.length} upstream executables keep their +x`, notExec.slice(0, 5).join(', '));
 } else if (process.platform === 'win32') {
   notes.push(`7i skipped on win32 (no exec bits; ${execInTrees.length} files to preserve, enforced by CI)`);
 } else {
@@ -248,8 +252,15 @@ check(!claudeListed.some((e) => e.name === 'example-plugin'), '8e example-plugin
 check(names.has('example-plugin'), '8f example-plugin is still mirrored on disk');
 
 // ---------------------------------------------------------------------------
+// On success only the tally is printed, so a check that quietly degrades into a
+// note leaves no trace in the CI log. VERIFY_VERBOSE=1 (set by sync.yml) lists
+// what actually ran, which is the only way to tell "22 executables are still +x"
+// from "the check took the skip branch".
 const label = failures.length ? 'FAIL' : 'OK';
 console.log(`[verify] ${label} -- ${notes.length} checks passed, ${failures.length} failed`);
+if (process.env.VERIFY_VERBOSE && process.env.VERIFY_VERBOSE !== '0') {
+  for (const line of notes) console.log(`  . ${line}`);
+}
 for (const line of failures) console.error(`  x ${line}`);
 if (failures.length) process.exit(1);
 console.log(`[verify] sha ${portability.sha.slice(0, 12)} | ${catalog.total} plugins | manifests ${tracked.size} upstream + ${generated.length} copies | markets zcode ${zcodeListed.length}+${zcodeUnlisted.length} / claude ${claudeListed.length}`);

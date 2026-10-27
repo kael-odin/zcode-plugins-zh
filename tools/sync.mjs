@@ -38,24 +38,27 @@ const sha = git(UPSTREAM_DIR, 'rev-parse', 'HEAD');
 
 const blobSha = (buf) => crypto.createHash('sha1').update(`blob ${buf.length}\0`).update(buf).digest('hex');
 
-// One listing of the whole commit: path -> object id. `-l` pads the size field
-// even though it is unused, and -z keeps paths intact if one ever holds a newline.
+// One listing of the whole commit: path -> { oid, mode }. `-l` pads the size
+// field even though it is unused, and -z keeps paths intact if one ever holds a
+// newline. The mode travels with the object because a writeFileSync lands as
+// 0644: 23 upstream files are 100755, and Windows cannot even show the drift
+// (core.filemode=false), so a mode-blind mirror has to lose them silently.
 const entries = new Map();
 for (const rec of git(UPSTREAM_DIR, 'ls-tree', '-r', '-l', '-z', 'HEAD').split('\0')) {
-  const m = rec.match(/^\d+ blob ([0-9a-f]+) +\d+\t([\s\S]+)$/);
-  if (m) entries.set(m[2], { oid: m[1] });
+  const m = rec.match(/^(\d+) blob ([0-9a-f]+) +\d+\t([\s\S]+)$/);
+  if (m) entries.set(m[3], { oid: m[2], mode: m[1] });
 }
 
-/** Group the commit's files as tree -> plugin -> [{ rel, oid }]. */
+/** Group the commit's files as tree -> plugin -> [{ rel, oid, mode }]. */
 function indexByPlugin() {
   const byTree = new Map(cfg.trees.map((t) => [t, new Map()]));
-  for (const [p, { oid }] of entries) {
+  for (const [p, { oid, mode }] of entries) {
     const m = p.match(/^([^/]+)\/([^/]+)\/([\s\S]+)$/);
     if (!m || !byTree.has(m[1])) continue;
     const [, tree, name, rel] = m;
     const plugins = byTree.get(tree);
     if (!plugins.has(name)) plugins.set(name, []);
-    plugins.get(name).push({ rel, oid });
+    plugins.get(name).push({ rel, oid, mode });
   }
   return byTree;
 }
@@ -130,6 +133,10 @@ for (const tree of cfg.trees) {
       const abs = path.join(dst, f.rel);
       fs.mkdirSync(path.dirname(abs), { recursive: true });
       fs.writeFileSync(abs, buf);
+      // Restore the upstream executable bit. No-op on Windows, load-bearing on
+      // Linux: git there records 100755 from the file system, so omitting this
+      // demotes every upstream script to 100644 on the first CI sync.
+      if (f.mode === '100755') fs.chmodSync(abs, 0o755);
       written++;
     }
     if (!written) throw new Error(`wrote nothing for ${tree}/${name}`);
@@ -147,7 +154,12 @@ for (const tree of cfg.trees) {
   }
 }
 
-const syncedAt = new Date().toISOString();
+// Timestamps have to be a function of the upstream commit, not of the clock.
+// The workflow skips its commit only when `git add -A` stages nothing, so a
+// wall-clock stamp minted an empty "sync" commit every single day and buried
+// real upstream changes in noise. Pinning to the commit date makes a rerun on
+// the same SHA produce byte-identical data/.
+const syncedAt = git(UPSTREAM_DIR, 'log', '-1', '--format=%cI', 'HEAD') || new Date().toISOString();
 
 if (corrupt.length) {
   console.error(`[sync] FATAL ${corrupt.length} object(s) did not hash back to their id:`);

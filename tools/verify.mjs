@@ -11,7 +11,9 @@
  *   4  both marketplaces parse, agree on counts, and point at real dirs
  *   5  catalog counts agree with the portability analysis
  *   6  README numbers agree with the catalog
- *   7  no build junk, no tracked .upstream, no seed files
+ *   7  no build junk, no tracked .upstream, no seed files, no EOL drift,
+ *      mirrored bytes identical to upstream, platform-neutral path refs,
+ *      executable bits intact
  *   8  the two hand-picked decisions still hold (github renamed, example-plugin hidden)
  */
 import fs from 'node:fs';
@@ -173,12 +175,15 @@ check(/^\*\s+-text\s*$/m.test(attrs), '7f .gitattributes disables EOL rewrite (a
 // 7g -- the real promise of this repo: mirrored bytes == upstream bytes. Checked
 // against the upstream commit's blob ids, so a CRLF checkout or a stray edit to a
 // mirrored file cannot pass. Skips only when .upstream is absent (verify-only runs).
+const upstreamModes = new Map();
 if (hasGit(UPSTREAM_DIR)) {
   const blobSha = (buf) => crypto.createHash('sha1').update(`blob ${buf.length}\0`).update(buf).digest('hex');
   const upstream = new Map();
   for (const line of git(UPSTREAM_DIR, 'ls-tree', '-r', 'HEAD').split('\n')) {
-    const m = line.match(/^\d+ blob ([0-9a-f]+)\t(.+)$/);
-    if (m) upstream.set(m[2], m[1]);
+    const m = line.match(/^(\d+) blob ([0-9a-f]+)\t(.+)$/);
+    if (!m) continue;
+    upstream.set(m[3], m[2]);
+    if (m[1] === '100755') upstreamModes.set(m[3], m[1]);
   }
   const walk = (abs, rel) => fs.readdirSync(abs, { withFileTypes: true }).flatMap((e) => {
     const childAbs = path.join(abs, e.name);
@@ -209,6 +214,27 @@ if (hasGit(UPSTREAM_DIR)) {
 const backslashRefs = (portability.plugins ?? []).flatMap((p) =>
   (p.reasons ?? []).filter((r) => /[A-Za-z0-9_.-]\\/.test(r)).map((r) => `${p.name}: ${r}`));
 check(backslashRefs.length === 0, '7h no reason string carries a backslash path', backslashRefs.slice(0, 3).join(' | '));
+
+// 7i -- the executable bit is part of the payload. Upstream stores 23 files as
+// 100755 (installers, hooks, the mimosa dist entrypoint). fs.writeFileSync lands
+// 0644, and a mode-blind mirror therefore demotes them. Windows cannot show the
+// drift -- it has no exec bit and core.filemode=false -- so the only honest place
+// to assert it is a POSIX working tree, which is also the tree that commits.
+// Deliberately checks disk and not `git ls-files -s`: sync chmods files that are
+// not staged yet, so the index still holds the pre-sync mode until `git add`.
+const execInTrees = [...upstreamModes.keys()].filter((rel) => cfg.trees.some((t) => rel.startsWith(`${t}/`)));
+if (hasGit(UPSTREAM_DIR) && process.platform !== 'win32') {
+  const notExec = execInTrees.filter((rel) => {
+    const abs = path.join(ROOT, rel);
+    if (!fs.existsSync(abs)) return false; // absence is 7g's finding, not this one
+    return !(fs.statSync(abs).mode & 0o111);
+  });
+  check(notExec.length === 0, `7i ${execInTrees.length} upstream executables keep their +x`, notExec.slice(0, 5).join(', '));
+} else if (process.platform === 'win32') {
+  notes.push(`7i skipped on win32 (no exec bits; ${execInTrees.length} files to preserve, enforced by CI)`);
+} else {
+  notes.push('7i .upstream absent -- executable-bit check skipped');
+}
 
 // 8 -- the two hand-picked decisions
 const gh = claudeListed.find((e) => e.name === 'zcode-github');

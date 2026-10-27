@@ -183,7 +183,11 @@ const catalogPlugins = dirs
   .sort((a, b) => a.name.localeCompare(b.name));
 
 writeJson(path.join(DATA_DIR, 'catalog.json'), {
-  generatedAt: new Date().toISOString(),
+  // Same reason as sync.mjs: derived from the upstream commit, never the clock.
+  // catalog.json is the input to the site build and the README matrix, and a
+  // wall-clock stamp alone is enough to make the daily workflow commit nothing
+  // but a timestamp.
+  generatedAt: portability.syncedAt,
   upstream: cfg.upstreamRepo,
   sha: portability.sha,
   syncedAt: portability.syncedAt,

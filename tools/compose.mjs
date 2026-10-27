@@ -6,6 +6,7 @@
  *
  *   marketplace.json                  ZCode reads this (upstream's shape, our identity)
  *   .claude-plugin/marketplace.json   Claude Code reads this
+ *   .agents/plugins/marketplace.json  Codex reads this (also its legacy-first path)
  *   <plugin>/.claude-plugin/plugin.json   created only where upstream ships none
  *
  * The plugin payload is never rewritten. Where upstream already ships a Claude
@@ -121,7 +122,29 @@ writeJson(path.join(ROOT, '.claude-plugin', 'marketplace.json'), {
 });
 
 // ---------------------------------------------------------------------------
-// 3. ZCode marketplace (same tree, upstream identity replaced)
+// 3. Codex marketplace
+// ---------------------------------------------------------------------------
+
+// codex-rs resolves marketplaces by probing `.agents/plugins/marketplace.json`
+// before `.claude-plugin/marketplace.json`, so shipping the Codex-native file
+// keeps `plugin marketplace add` working on releases that predate Claude-dialect
+// discovery. Entry schema is name + source (+ optional policy/category); the
+// source object form mirrors openai/plugins. Entry descriptions are tolerated
+// (they feed Codex's manifest fallback) but listing metadata mostly comes from
+// each plugin's `.claude-plugin/plugin.json`, which Codex also discovers.
+writeJson(path.join(ROOT, '.agents', 'plugins', 'marketplace.json'), {
+  name: cfg.marketplace,
+  plugins: claudeEntries.map(({ name, description, source, category, version }) => ({
+    name,
+    source: { source: 'local', path: source },
+    ...(category ? { category } : {}),
+    ...(description ? { description } : {}),
+    ...(version ? { version } : {}),
+  })),
+});
+
+// ---------------------------------------------------------------------------
+// 4. ZCode marketplace (same tree, upstream identity replaced)
 // ---------------------------------------------------------------------------
 
 // Upstream keeps a second bucket for plugins it ships but hides from the UI
@@ -148,7 +171,7 @@ writeJson(path.join(ROOT, 'marketplace.json'), {
 });
 
 // ---------------------------------------------------------------------------
-// 4. Catalog for the README and the site
+// 5. Catalog for the README and the site
 // ---------------------------------------------------------------------------
 
 const catalogPlugins = dirs
@@ -209,7 +232,7 @@ writeJson(path.join(DATA_DIR, 'catalog.json'), {
   plugins: catalogPlugins,
 });
 
-console.log(`[compose] ${catalogPlugins.length} plugins mirrored; ZCode marketplace lists ${zcodeListedEntries.length}+${zcodeUnlistedEntries.length} unlisted, Claude marketplace lists ${claudeEntries.length}`);
+console.log(`[compose] ${catalogPlugins.length} plugins mirrored; ZCode marketplace lists ${zcodeListedEntries.length}+${zcodeUnlistedEntries.length} unlisted, Claude marketplace lists ${claudeEntries.length}, Codex marketplace lists ${claudeEntries.length}`);
 if (unlistedUpstream.length) console.log(`[compose] mirrored but unlisted upstream (kept out of both markets): ${unlistedUpstream.join(', ')}`);
 console.log(`[compose] Claude manifests: ${upstreamVariants.length} upstream + ${generated.length} generated (${generated.filter((g) => !g.identical).length} rewritten, ${generated.filter((g) => g.identical).length} byte copies)`);
 if (Object.keys(appliedRenames).length) {

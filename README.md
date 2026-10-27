@@ -23,7 +23,9 @@ claude plugin install zcode-github@zcode-plugins-zh
 codex plugin marketplace add https://github.com/kael-odin/zcode-plugins-zh.git
 ```
 
-或打开 **设置 → 插件 → 添加市场**，填入仓库地址。
+或打开 **设置 → 插件 → 添加市场**，填入仓库地址。安装后**重开会话**才会加载。
+
+依据 codex-rs 源码（`marketplace.rs`、`plugin_namespace.rs`）：Codex 按 `.agents/plugins/marketplace.json` → `.claude-plugin/marketplace.json` 的顺序探测市场索引，本仓**两份都发**（前者是 Codex 原生格式、探测优先，后者兜底）；插件清单的发现顺序是 `.codex-plugin/plugin.json` → `.claude-plugin/plugin.json` → `.cursor-plugin/plugin.json`，54 个插件目录都带 `.claude-plugin/plugin.json`，无需再生成 `.codex-plugin` 变体。诚实声明：以上契约**读的是 codex-rs 源码，不是在本机 Codex CLI 里实测的**；矩阵那一节的能力判定按 Claude 视角测得，Codex 侧的宿主变量 / 未构建产物限制与文件同源、结论可迁移，hooks 在 Codex 里的行为未逐个实测。
 
 **ZCode**
 
@@ -149,11 +151,12 @@ MCP 配置里引用了只有 ZCode 宿主才会展开的变量，换 agent 直�
 | 新增 | 说明 |
 | --- | --- |
 | `marketplace.json` | ZCode 视角的市场索引，镜像上游形状（含 `unlistedPlugins`） |
-| `.claude-plugin/marketplace.json` | Claude Code / Codex 读的市场索引，53 条 |
+| `.claude-plugin/marketplace.json` | Claude Code 读的市场索引，53 条 |
+| `.agents/plugins/marketplace.json` | Codex 读的市场索引（Codex 原生格式、探测优先），同样 53 条 |
 | 28 个 `.claude-plugin/plugin.json` | 只补上游缺的那些，**逐字复制** ZCode 清单，不改写任何字段 |
 | `tools/analyze.mjs` | 从 Claude 生效视角给 54 个插件分档，产出 `data/portability.json` |
-| `tools/compose.mjs` | 生成两份市场索引 + 28 份清单 + `data/catalog.json` |
-| `tools/verify.mjs` | 29 项断言，把本文里的每个数字钉在数据上；失败即非零退出 |
+| `tools/compose.mjs` | 生成三份市场索引 + 28 份清单 + `data/catalog.json` |
+| `tools/verify.mjs` | 39 项断言，把本文里的每个数字钉在数据上；失败即非零退出 |
 | `tools/readme.mjs` | 从 catalog 重渲染上面那张矩阵，防止正文与数据漂移 |
 
 插件源码、上游自带的 26 份 Claude 清单、`LICENSE` 全部**字节未动**。`tools/verify.mjs` 用 git blob 哈希逐文件比对来守住这条线——不是靠人自觉。
@@ -172,7 +175,8 @@ node tools/verify.mjs    # 门禁
 plugins/            # 上游插件，逐字保留（含 15 个 UI 插件）
 external_plugins/   # 上游外部插件，逐字保留
 marketplace.json    # ZCode 市场索引（镜像上游）
-.claude-plugin/     # Claude Code / Codex 市场索引
+.claude-plugin/     # Claude Code 市场索引
+.agents/plugins/    # Codex 市场索引（Codex 原生格式）
 config/             # 同步与发布策略（上游地址、重命名、排除列表）
 data/               # portability.json（分档依据）+ catalog.json（全量元数据）
 tools/              # sync / analyze / compose / readme / verify

@@ -100,6 +100,28 @@ const badClaudeSource = claudeListed.filter((e) => {
 });
 check(badClaudeSource.length === 0, '4d Claude sources resolve', badClaudeSource.map((e) => `${e.name}->${e.source}`).join(', '));
 
+// Codex (codex-rs marketplace.rs) probes `.agents/plugins/marketplace.json`
+// first, then `.claude-plugin/marketplace.json`. The generated file must keep
+// Codex's two hard entry rules: source is the `{source: "local", path}` object
+// whose path starts with `./` and stays normalized (no `..`, no empty).
+const codexMarket = readJson(path.join(ROOT, '.agents', 'plugins', 'marketplace.json'));
+check(codexMarket && codexMarket.name === claudeMarket.name, '4g Codex marketplace name matches the Claude one',
+  `${codexMarket?.name} != ${claudeMarket.name}`);
+const codexListed = codexMarket?.plugins ?? [];
+check(dup(codexListed).length === 0, '4h Codex marketplace names unique', dup(codexListed).join(', '));
+const badCodexSource = codexListed.filter((e) => {
+  const src = e.source ?? {};
+  const rel = typeof src === 'object' ? String(src.path ?? '') : String(src);
+  if (!rel.startsWith('./')) return true;
+  const inner = rel.slice(2);
+  return !inner || inner.split('/').some((seg) => seg === '' || seg === '.')
+    || !fs.existsSync(path.join(ROOT, inner, '.claude-plugin', 'plugin.json'));
+});
+check(badCodexSource.length === 0, '4i Codex sources resolve with ./ paths', badCodexSource.map((e) => e.name).join(', '));
+check(codexListed.length === claudeListed.length
+  && codexListed.every((e) => claudeListed.some((c) => c.name === e.name && c.source === (e.source?.path ?? e.source))),
+  '4j Codex marketplace mirrors the Claude entry set', '');
+
 // Upstream publishes 53 of its 54: the template is mirrored but deliberately
 // unlisted. Coverage counts are taken from the catalog's own membership flags,
 // which 5g/5h then tie back to these same files. Exclusion and publication are

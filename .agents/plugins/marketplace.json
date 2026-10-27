@@ -1,0 +1,533 @@
+{
+  "name": "zcode-plugins-zh",
+  "plugins": [
+    {
+      "name": "accounting-and-reporting",
+      "source": {
+        "source": "local",
+        "path": "./plugins/accounting-and-reporting"
+      },
+      "category": "finance",
+      "description": "【企业财务】核算与报告:月结关账检查与阻断项、总账与明细账勾稽及交易级差异归因、科目映射与重分类、内部管理报表编制、三表勾稽复核",
+      "version": "0.1.1"
+    },
+    {
+      "name": "alibaba-cloud-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/alibaba-cloud-cli"
+      },
+      "category": "developer-tools",
+      "description": "阿里云 CLI 工作流：配置凭证与 profile，并安全执行云资源查询和操作。",
+      "version": "0.1.2"
+    },
+    {
+      "name": "anet",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/anet"
+      },
+      "category": "developer-tools",
+      "description": "通过本机 AgentNetwork（anet）节点经 A2A 协议把任务交给其他 AI 智能体：发现智能体，发送并跟踪端到端加密的任务，在运营者设定的额度内支付付费技能，并答复其他智能体发给本节点的任务。",
+      "version": "0.1.3"
+    },
+    {
+      "name": "assess-credit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/assess-credit"
+      },
+      "category": "finance",
+      "description": "【二级市场】固收研究:债券档案与估值、发行主体信用、收益率曲线与信用利差、信用风险跟踪",
+      "version": "0.1.2"
+    },
+    {
+      "name": "autoresearch",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/autoresearch"
+      },
+      "category": "developer-tools",
+      "description": "ZCode 自主实验循环：设定目标与机械度量，让 agent 迭代。每一轮测量、保留有效改动、回滚无效改动，如此往复。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "blender",
+      "source": {
+        "source": "local",
+        "path": "./plugins/blender"
+      },
+      "category": "游戏/3D",
+      "description": "引导安装和使用官方 Blender CLI，逐轮打开界面建模，实际看图后调整同一项目。",
+      "version": "0.4.1"
+    },
+    {
+      "name": "cadcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/cadcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 CADCraft 进行CAD 绘图，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "cloudbase-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/cloudbase-skills"
+      },
+      "category": "developer-tools",
+      "description": "腾讯云 CloudBase 开发技能与 MCP 集成，覆盖 Web、微信小程序、数据库、云函数、云托管、云存储和 AI 项目的开发、部署与排障。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "deckcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/deckcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 DeckCraft 进行演示文稿，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "designcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/designcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 DesignCraft 进行页面排版，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "dingtalk-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dingtalk-cli"
+      },
+      "category": "productivity",
+      "description": "钉钉 Workspace CLI 工作流：OAuth/设备授权、验证组织账号，并按需安装上游 Skills。",
+      "version": "0.1.1"
+    },
+    {
+      "name": "excalidraw",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/excalidraw"
+      },
+      "category": "productivity",
+      "description": "让 Agent 生成图形，在对话侧栏用 Excalidraw 编辑、引用选区、继续修改并导出。",
+      "version": "0.3.4"
+    },
+    {
+      "name": "finance-search",
+      "source": {
+        "source": "local",
+        "path": "./plugins/finance-search"
+      },
+      "category": "finance",
+      "description": "SEC EDGAR 文件检索与财经网页、新闻搜索 MCP 服务。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "find-clients",
+      "source": {
+        "source": "local",
+        "path": "./plugins/find-clients"
+      },
+      "category": "finance",
+      "description": "【一级市场与银行】对公营销:按区域/产业链/园区筛选目标客户、园区与集群扫描、商机线索、客户全景画像",
+      "version": "0.1.2"
+    },
+    {
+      "name": "gitlab",
+      "source": {
+        "source": "local",
+        "path": "./plugins/gitlab"
+      },
+      "category": "developer-tools",
+      "description": "基于官方 GitLab CLI 的 Merge Request、Issue、CI/CD、仓库、Release 与 API 工作流。",
+      "version": "0.1.3"
+    },
+    {
+      "name": "godot",
+      "source": {
+        "source": "local",
+        "path": "./plugins/godot"
+      },
+      "category": "游戏/3D",
+      "description": "使用官方 Godot CLI 开发游戏，在原版桌面编辑器中查看每轮场景与运行效果。",
+      "version": "0.4.0"
+    },
+    {
+      "name": "gridcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/gridcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 GridCraft 进行电子表格，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "hexin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hexin"
+      },
+      "category": "finance",
+      "description": "同花顺股票、海外股票、指数、基金与债券数据 MCP 服务。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "hyper3d-rodin",
+      "source": {
+        "source": "local",
+        "path": "./plugins/hyper3d-rodin"
+      },
+      "category": "游戏/3D",
+      "description": "将文字或参考图片生成 3D 模型，把生成的模型拆分为独立部件，并下载到项目中使用。",
+      "version": "0.1.1"
+    },
+    {
+      "name": "jev-decisions",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/jev-decisions"
+      },
+      "category": "developer-tools",
+      "description": "通过社区版 jev-mcp 服务为 ZCode 智能体提供校准判断工具：对照证据核实结论、筛查不可信文本、批量分类、多候选择优、任务完成门禁。内置一个 Skill，教会智能体何时应调用判断工具而不是直接凭阅读作答。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "jupyter-notebook",
+      "source": {
+        "source": "local",
+        "path": "./plugins/jupyter-notebook"
+      },
+      "category": "developer-tools",
+      "description": "在对话侧栏打开 Jupyter Notebook：连接已有的 Jupyter Server 或为工作区启动一个，Agent 与用户一起编辑和运行 cell。",
+      "version": "0.2.0"
+    },
+    {
+      "name": "kicad",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/kicad"
+      },
+      "category": "developer-tools",
+      "description": "把 KiCad 10 嵌入对话：Agent 用电路 spec 设计双层板（真实 KiCad 库、自动布线、DRC、Gerber/BOM/贴片坐标），侧栏面板显示 3D 渲染和 DRC 结论；一键在真实的 KiCad PCB Editor 里继续编辑，保存后自动同步回对话。",
+      "version": "0.6.1"
+    },
+    {
+      "name": "lark-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/lark-cli"
+      },
+      "category": "productivity",
+      "description": "Lark CLI 工作流：覆盖文档、表格、多维表格、日历、消息等 SaaS 资源，并引导应用配置与 OAuth 登录。",
+      "version": "0.1.2"
+    },
+    {
+      "name": "libtv-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/libtv-cli"
+      },
+      "category": "productivity",
+      "description": "LibTV 官方 CLI 技能，支持视频创作画布、工作区、节点、模型、素材上传与生成工作流。",
+      "version": "0.2.0"
+    },
+    {
+      "name": "mimosa",
+      "source": {
+        "source": "local",
+        "path": "./plugins/mimosa"
+      },
+      "category": "developer-tools",
+      "description": "面向 ZCode 的本地优先代码安全防线，提供写入前 Hook、任务收尾复查、Git 门禁、命令、安全扫描 Skill，以及用于密封深扫的可选 MCP 服务。",
+      "version": "1.0.4"
+    },
+    {
+      "name": "model-deals",
+      "source": {
+        "source": "local",
+        "path": "./plugins/model-deals"
+      },
+      "category": "finance",
+      "description": "【一级市场与银行】交易测算:并购增厚/摊薄、资金来源与用途及形式资本结构、可比交易、募投与摊薄",
+      "version": "0.1.1"
+    },
+    {
+      "name": "obsidian",
+      "source": {
+        "source": "local",
+        "path": "./plugins/obsidian"
+      },
+      "category": "productivity",
+      "description": "来自 kepano/obsidian-skills 的 Obsidian 创作技能：Obsidian 风格 Markdown 笔记、Bases 数据库视图、JSON Canvas 白板、Obsidian CLI 库操作、Defuddle 网页正文提取、Knap 模板批量生成笔记；并集成 axtonliu/axton-obsidian-visual-skills 的可视化技能：Mermaid/Excalidraw 图表生成与文本转画布布局。附 setup 技能，检测并安装 Obsidian CLI、defuddle 与 knap。",
+      "version": "0.1.2"
+    },
+    {
+      "name": "openpencil",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/openpencil"
+      },
+      "category": "developer-tools"
+    },
+    {
+      "name": "pdfcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/pdfcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 PdfCraft 进行PDF 编辑，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "photocraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/photocraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 PhotoCraft 进行图片编辑，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "pick-funds",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pick-funds"
+      },
+      "category": "finance",
+      "description": "【二级市场】基金选品:多条件筛选、基金与经理画像、持仓风格与重合度分析",
+      "version": "0.1.1"
+    },
+    {
+      "name": "read-macro",
+      "source": {
+        "source": "local",
+        "path": "./plugins/read-macro"
+      },
+      "category": "finance",
+      "description": "【二级市场】自上而下:宏观仪表盘、指数估值分位与盈利归因、大类资产配置观点、政策与产业规划跟踪",
+      "version": "0.1.1"
+    },
+    {
+      "name": "ruic-card",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/ruic-card"
+      },
+      "category": "游戏/3D",
+      "description": "全息闪卡生成器：分层画稿 + Blender + Three.js，两条路线——用描述或参考图绘制四层图，或直接把已有照片切成四层（rembg 抠图、可选去水印，附动画渲染与 MP4 / 微信动图交付）。产出可交互的 3D 视差闪卡网页与可编辑的 card.blend 工程。",
+      "version": "1.1.1"
+    },
+    {
+      "name": "run-fpa",
+      "source": {
+        "source": "local",
+        "path": "./plugins/run-fpa"
+      },
+      "category": "finance",
+      "description": "【企业财务】财务部与FP&A:管理报表、13周滚动现金流预测、预算差异分析、情景与盈亏平衡、投入决策测算、上市同业对标",
+      "version": "0.1.1"
+    },
+    {
+      "name": "soundcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/soundcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 SoundCraft 进行音频编辑，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "tencent-meeting-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tencent-meeting-cli"
+      },
+      "category": "productivity",
+      "description": "腾讯会议 CLI 工作流：OAuth2 授权、会议管理、录制管理和参会报告查询。",
+      "version": "0.1.3"
+    },
+    {
+      "name": "tianyancha",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tianyancha"
+      },
+      "category": "finance",
+      "description": "天眼查企业信息查询 MCP 服务。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "tripo-3d",
+      "source": {
+        "source": "local",
+        "path": "./plugins/tripo-3d"
+      },
+      "category": "游戏/3D",
+      "description": "用文字或图片生成带贴图的 3D 模型，添加骨骼与动画、精简模型面数，导出用于游戏或 3D 打印的素材。需使用 Tripo 国内站账号。",
+      "version": "0.1.4"
+    },
+    {
+      "name": "typst-workbench",
+      "source": {
+        "source": "local",
+        "path": "./plugins/typst-workbench"
+      },
+      "category": "productivity",
+      "description": "用你本机的 Typst 在对话侧栏实时预览文档：Agent 改完文件预览即刻更新，查看错误与渲染页面、在预览中标出位置、导出 PDF；你可以选中预览中的文字，连同对应的源码位置发给 Agent。",
+      "version": "0.2.0"
+    },
+    {
+      "name": "unity",
+      "source": {
+        "source": "local",
+        "path": "./plugins/unity"
+      },
+      "category": "游戏/3D",
+      "description": "在 Unity 中搭建游戏场景、编辑物体和资源、编写 C# 脚本，运行并调试游戏原型。",
+      "version": "0.1.5"
+    },
+    {
+      "name": "unreal-engine",
+      "source": {
+        "source": "local",
+        "path": "./plugins/unreal-engine"
+      },
+      "category": "游戏/3D",
+      "description": "在 Unreal Engine 中搭建和编辑关卡、调整场景物体，创建与调试蓝图逻辑，制作游戏原型。",
+      "version": "0.1.3"
+    },
+    {
+      "name": "vectorcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/vectorcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 VectorCraft 进行矢量绘图，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "vet-companies",
+      "source": {
+        "source": "local",
+        "path": "./plugins/vet-companies"
+      },
+      "category": "finance",
+      "description": "【一级市场与银行】企业排查:尽调报告、关联方与供应链图谱、失信涉诉质押风险快扫",
+      "version": "0.1.2"
+    },
+    {
+      "name": "video-agent-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/video-agent-kit"
+      },
+      "category": "productivity",
+      "description": "自动化视频剪辑工具包: 标准云端语音转录与合成、完整视频抽帧理解、局部复看、时间线、预览渲染、QC 和 TTS。",
+      "version": "0.4.3"
+    },
+    {
+      "name": "video2code",
+      "source": {
+        "source": "local",
+        "path": "./plugins/video2code"
+      },
+      "category": "productivity",
+      "description": "基于 ZCode 内置 Browser Use WebView 录制 WebM 并用 ffmpeg 转成 MP4/URL 复刻；无需 Playwright 或外部 Chromium",
+      "version": "0.6.1"
+    },
+    {
+      "name": "watch-positions",
+      "source": {
+        "source": "local",
+        "path": "./plugins/watch-positions"
+      },
+      "category": "finance",
+      "description": "【二级市场】持仓跟踪:自选股清单、带异动归因的盘后复盘、持仓事件分级提醒",
+      "version": "0.1.1"
+    },
+    {
+      "name": "wecom-cli",
+      "source": {
+        "source": "local",
+        "path": "./plugins/wecom-cli"
+      },
+      "category": "productivity",
+      "description": "企业微信 CLI 工作流：覆盖消息、文档、表格、邮件、日历、会议、通讯录和待办，并支持扫码授权与状态检查。",
+      "version": "0.1.1"
+    },
+    {
+      "name": "wind",
+      "source": {
+        "source": "local",
+        "path": "./plugins/wind"
+      },
+      "category": "finance",
+      "description": "万得股票、海外股票、指数、基金、债券、宏观经济与公告研报数据 MCP 服务。",
+      "version": "0.1.0"
+    },
+    {
+      "name": "wordcraft",
+      "source": {
+        "source": "local",
+        "path": "./external_plugins/wordcraft"
+      },
+      "category": "productivity",
+      "description": "在 ZCode 面板中使用 WordCraft 进行文字处理，支持打开工作区文件和通过宿主保存导出。",
+      "version": "0.2.4"
+    },
+    {
+      "name": "write-research",
+      "source": {
+        "source": "local",
+        "path": "./plugins/write-research"
+      },
+      "category": "finance",
+      "description": "【二级市场】研究产出:深度研报、行业分析、财报点评、DCF/LBO/三表估值模型",
+      "version": "0.1.1"
+    },
+    {
+      "name": "zcode-github",
+      "source": {
+        "source": "local",
+        "path": "./plugins/github"
+      },
+      "category": "developer-tools",
+      "description": "基于 GitHub CLI 的 GitHub 工作流，覆盖提交、Pull Request、Issue、Release、Actions、仓库、Codespaces 等资源。",
+      "version": "0.1.3"
+    },
+    {
+      "name": "zcode-mcp-app-dev",
+      "source": {
+        "source": "local",
+        "path": "./plugins/zcode-mcp-app-dev"
+      },
+      "category": "developer-tools",
+      "description": "使用官方 SDK 开发 ZCode MCP App，附宿主扩展约定与独立构建指引。",
+      "version": "0.1.1"
+    },
+    {
+      "name": "zotero",
+      "source": {
+        "source": "local",
+        "path": "./plugins/zotero"
+      },
+      "category": "productivity",
+      "description": "在对话侧栏使用你的 Zotero 文库：搜索与阅读论文和你的高亮，Agent 在 PDF 中标出依据、生成引用与 .bib 文件，并可导入论文、写笔记、整理分类。",
+      "version": "0.2.1"
+    }
+  ]
+}

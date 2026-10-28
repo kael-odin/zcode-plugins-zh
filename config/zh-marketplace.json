@@ -16,6 +16,9 @@
   "claudeExclude": [
     "example-plugin"
   ],
+  "marketTiers": [
+    "clean"
+  ],
   "trees": [
     "plugins",
     "external_plugins"

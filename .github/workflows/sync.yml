@@ -33,8 +33,13 @@ jobs:
       - name: Classify portability
         run: node tools/analyze.mjs
 
-      - name: Compose both marketplaces
+      - name: Compose marketplaces
         run: node tools/compose.mjs
+
+      # Icons are committed (site/appicons/), so a new upstream plugin only
+      # gets its icon when this runs; failure keeps the site on monograms.
+      - name: Fetch icons
+        run: node tools/fetch-icons.mjs || echo "[warn] icon fetch failed, keeping committed icons"
 
       # The README's 54-row matrix is generated from data/catalog.json, so it
       # has to run before verify: verify checks the numbers the README prints,

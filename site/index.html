@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZCode 官方插件 · 跨 agent 可移植版 · {{TOTAL}} 个插件的可移植性矩阵</title>
+<meta name="description" content="zai-org/zcode-plugins 全部 {{TOTAL}} 个插件的跨 agent 可移植性矩阵：{{CLEAN}} 个直接可用插件一键装进 Claude Code / Codex（一键市场只列它们），其余的按实测缺口标注原因、源码逐字保留在仓库里。每日跟随上游更新。">
+<meta name="keywords" content="ZCode 插件, ZCode 官方插件, Claude Code 插件, Codex 插件, 跨 agent 插件, zcode-plugins, 插件可移植性, MCP, Agent Skills, 插件市场">
+<link rel="canonical" href="https://kael-odin.github.io/zcode-plugins-zh/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<!--
+  {{TOTAL}} and {{CLEAN}} are substituted by tools/build-site.mjs from
+  data/catalog.json, so the crawlable text states the real current counts
+  instead of numbers that go stale on the next sync.
+-->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d9488'/><text x='50' y='68' font-size='44' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='white'>Zz</text></svg>">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="zcode-plugins-zh">
+<meta property="og:title" content="ZCode 官方插件 · 跨 agent 可移植版">
+<meta property="og:description" content="{{TOTAL}} 个 ZCode 官方插件源码逐字保留，{{CLEAN}} 个直接可用的一键装进 Claude Code / Codex，其余按实测缺口标注、作为原始资料留在仓库。">
+<meta property="og:url" content="https://kael-odin.github.io/zcode-plugins-zh/">
+<meta property="og:locale" content="zh_CN">
+<link rel="stylesheet" href="./style.css">
+<!--JSONLD-->
+</head>
+<body>
+<header class="top">
+  <div class="logo" style="background:linear-gradient(135deg,#0d9488,#34d399)">Zz</div>
+  <h1>ZCode 官方插件 · 跨 agent 可移植版</h1>
+  <span class="tagline">源码逐字保留 · 可移植性逐个实测 · 一键市场只装「直接可用」</span>
+  <div class="top-actions">
+    <span class="snap">数据快照 <span id="meta">…</span></span>
+    <button id="theme" class="ctl" aria-label="切换深浅主题">🌙</button>
+    <a class="ctl" href="https://github.com/kael-odin/zcode-plugins-zh" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-title">快速分类</div>
+    <div id="rail"></div>
+  </aside>
+
+  <main class="main">
+    <div class="controls">
+      <div class="search-row">
+        <input id="q" class="search" type="search" placeholder="例如：github、3D、金融研报、飞书、PPT …">
+        <button id="clear" class="clear">清空</button>
+      </div>
+      <div id="pills" class="quick-filters"></div>
+      <div class="filters">
+        <select id="f-cat"><option value="">全部分类</option></select>
+        <select id="f-sort">
+          <option value="default">推荐排序</option>
+          <option value="az">名称 A → Z</option>
+          <option value="za">名称 Z → A</option>
+        </select>
+      </div>
+      <div id="count" class="summary"></div>
+    </div>
+    <noscript><p class="noscript">上方检索与卡片由 JavaScript 渲染。未运行脚本时可直接用安装命令接入：<code>claude plugin marketplace add kael-odin/zcode-plugins-zh</code>，完整矩阵与说明见 <a href="https://github.com/kael-odin/zcode-plugins-zh#可移植性矩阵">README 的可移植性矩阵</a>。</p></noscript>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <aside class="detail" id="detailpane"></aside>
+  <button class="detail-backdrop" id="backdrop" aria-label="关闭详情"></button>
+</div>
+
+<footer>
+  <section class="about" id="about">
+    <h2>ZCode 官方插件的跨 agent 移植层 —— 不是再汉化一遍，是让别的 agent 也能用</h2>
+    <p>本页是 <a href="https://github.com/zai-org/zcode-plugins" target="_blank" rel="noopener">zai-org/zcode-plugins</a>（ZCode 官方插件仓库，Apache-2.0）的移植镜像：<b>{{TOTAL}} 个插件源码逐字节保留</b>，由 <code>tools/verify.mjs</code> 在每次发布前逐文件对账。ZCode 插件自带中文元数据，所以这里不翻译，缺的是<b>别的 agent 认不认</b>——这就是每个卡片上那档判定：✅ 直接可用 / ⚠️ 部分可用 / ❌ 装了也没用。</p>
+    <p><b>一键市场只收录「直接可用」的 {{CLEAN}} 个</b>：装进 Claude Code / Codex 后技能、命令、代理、MCP 与 ZCode 下一致。其余插件<b>不在一键市场</b>——它们各有明确缺口（ZCode 专有 hooks、宿主托管 MCP、上游没提交的构建产物），但源码仍然逐字保留在本仓库里作为原始资料，矩阵逐条写明缺在哪，改造即可用。</p>
+    <p>安装（Claude Code）：<code>claude plugin marketplace add kael-odin/zcode-plugins-zh</code>；安装（Codex）：<code>codex plugin marketplace add https://github.com/kael-odin/zcode-plugins-zh.git</code> 然后 <code>codex plugin add zcode-github@zcode-plugins-zh</code>，装完重开会话。契约依据见仓库内 <code>docs/codex-contract.md</code>。</p>
+    <p class="disclaimer">本项目为社区维护的<b>可移植性镜像</b>，与 Z.ai / ZCode 无隶属关系，亦未获其背书；插件名称、商标与内容权利归 Z.ai 及各权利人所有（见 <a href="https://github.com/kael-odin/zcode-plugins-zh/blob/main/NOTICE.md" target="_blank" rel="noopener">NOTICE</a>）。移除请求：开 issue 指名路径，确认后 72 小时内删除。</p>
+  </section>
+  上游 zai-org/zcode-plugins 以 Apache-2.0 发布；插件内容与商标归 Z.ai 及各自权利人所有。
+  <a href="https://github.com/kael-odin/zcode-plugins-zh">kael-odin/zcode-plugins-zh</a> ·
+  姊妹项目 <a href="https://github.com/kael-odin/claude-plugins-zh">claude-plugins-zh</a> ·
+  <a href="https://github.com/kael-odin/codex-plugins-zh">codex-plugins-zh</a>
+</footer>
+
+<script src="./app.js"></script>
+</body>
+</html>

@@ -123,19 +123,24 @@ check(codexListed.length === claudeListed.length
   '4j Codex marketplace mirrors the Claude entry set', '');
 
 // Upstream publishes 53 of its 54: the template is mirrored but deliberately
-// unlisted. Coverage counts are taken from the catalog's own membership flags,
-// which 5g/5h then tie back to these same files. Exclusion and publication are
-// independent, so the Claude set is the intersection -- the template is already
-// unpublished, and subtracting it again would invent a hole.
+// unlisted. The one-click markets carry only the configured tiers (clean by
+// default) -- everything else stays on disk as raw material, so the Claude set
+// is the intersection of published, tier-gated, and not config-excluded.
 const publishedCount = catalog.plugins.filter((p) => p.inZcodeMarket).length;
-const claudeEligible = catalog.plugins.filter((p) => p.inZcodeMarket && !p.claudeExcluded).length;
+const claudeEligible = catalog.plugins.filter((p) => p.inClaudeMarket).length;
+const marketTiers = new Set(catalog.marketTiers ?? ['clean']);
 
 check(zcodeListed.length + zcodeUnlisted.length === publishedCount,
   '4e ZCode marketplace covers every published plugin',
   `lists ${zcodeListed.length}+${zcodeUnlisted.length} of ${publishedCount}`);
 check(claudeListed.length === claudeEligible,
-  '4f Claude marketplace covers every published plugin except the excluded template',
+  '4f Claude marketplace covers exactly the tier-gated set',
   `lists ${claudeListed.length} of ${claudeEligible}`);
+const wrongTier = claudeListed.filter((e) => {
+  const p = catalog.plugins.find((c) => c.name === e.name || c.claudeName === e.name);
+  return !p || !marketTiers.has(p.tier);
+});
+check(wrongTier.length === 0, '4k every listed plugin is in a market tier', wrongTier.map((e) => e.name).join(', '));
 
 // 5 -- catalog agrees with the analysis
 const tiers = catalog.counts ?? {};

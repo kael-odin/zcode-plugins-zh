@@ -31,6 +31,10 @@ for (const entry of [...(upstreamMarketplace.plugins ?? []), ...(upstreamMarketp
 
 const exclude = new Set(cfg.claudeExclude ?? []);
 const renames = cfg.claudeRenames ?? {};
+// One-click markets carry only the tiers that behave identically outside ZCode
+// (default: clean). Everything else stays mirrored on disk as source material;
+// the matrix explains what breaks and docs/ keeps the raw pointers.
+const marketTiers = cfg.marketTiers ?? ['clean'];
 
 const dirs = pluginDirs(ROOT, cfg.trees);
 
@@ -91,6 +95,7 @@ for (const { name, dir } of dirs) {
 const claudeEntries = [];
 for (const { name, rel } of dirs) {
   if (exclude.has(name) || !published(name)) continue;
+  if (!marketTiers.includes(portabilityByName.get(name)?.tier)) continue;
   const src = metaFor(name);
   const claudeName = renames[name] ?? name;
   const entry = {
@@ -193,7 +198,7 @@ const catalogPlugins = dirs
       keywords: src.keywords ?? [],
       listed: published(name) && !(upstreamMarketplace.unlistedPlugins ?? []).some((e) => e.name === name),
       inZcodeMarket: published(name),
-      inClaudeMarket: published(name) && !exclude.has(name),
+      inClaudeMarket: published(name) && !exclude.has(name) && marketTiers.includes(p?.tier),
       claudeExcluded: exclude.has(name),
       tier: p?.tier ?? null,
       reasons: p?.reasons ?? [],
@@ -215,14 +220,14 @@ writeJson(path.join(DATA_DIR, 'catalog.json'), {
   sha: portability.sha,
   syncedAt: portability.syncedAt,
   marketplace: cfg.marketplace,
+  marketTiers,
   total: catalogPlugins.length,
   counts: {
     ...portability.counts,
-    zcodeListed: zcodeListedEntries.length,
-    zcodeUnlisted: zcodeUnlistedEntries.length,
     claudeListed: claudeEntries.length,
     codexListed: claudeEntries.length,
     claudeExcluded: catalogPlugins.filter((p) => p.claudeExcluded).length,
+    offMarketRaw: catalogPlugins.filter((p) => p.inZcodeMarket && !p.inClaudeMarket).length,
     zcodeListed: zcodeListedEntries.length,
     zcodeUnlisted: zcodeUnlistedEntries.length,
     unlistedUpstream: unlistedUpstream.length,
@@ -235,7 +240,7 @@ writeJson(path.join(DATA_DIR, 'catalog.json'), {
   plugins: catalogPlugins,
 });
 
-console.log(`[compose] ${catalogPlugins.length} plugins mirrored; ZCode marketplace lists ${zcodeListedEntries.length}+${zcodeUnlistedEntries.length} unlisted, Claude marketplace lists ${claudeEntries.length}, Codex marketplace lists ${claudeEntries.length}`);
+console.log(`[compose] ${catalogPlugins.length} plugins mirrored; ZCode marketplace lists ${zcodeListedEntries.length}+${zcodeUnlistedEntries.length} unlisted; one-click markets (tiers: ${marketTiers.join('/')}) list ${claudeEntries.length} (Claude + Codex each)`);
 if (unlistedUpstream.length) console.log(`[compose] mirrored but unlisted upstream (kept out of both markets): ${unlistedUpstream.join(', ')}`);
 console.log(`[compose] Claude manifests: ${upstreamVariants.length} upstream + ${generated.length} generated (${generated.filter((g) => !g.identical).length} rewritten, ${generated.filter((g) => g.identical).length} byte copies)`);
 if (Object.keys(appliedRenames).length) {

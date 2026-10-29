@@ -20,7 +20,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/accounting-and-reporting",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/accounting-and-reporting",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/accounting-reporting/icon.png"
     },
     {
@@ -33,7 +33,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/alibaba-cloud-cli",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/alibaba-cloud-cli",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/alibaba-cloud-cli/icon.png"
     },
     {
@@ -58,7 +58,7 @@
       "author": {
         "name": "TencentCloudBase"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/cloudbase-skills",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/cloudbase-skills",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/cloudbase-skills/icon.png"
     },
     {
@@ -84,7 +84,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/gitlab",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/gitlab",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/gitlab/icon.png"
     },
     {
@@ -96,7 +96,7 @@
       "author": {
         "name": "ZCode"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/godot",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/godot",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/godot/icon.png"
     },
     {
@@ -122,7 +122,7 @@
         "name": "kittimzhe",
         "url": "https://github.com/kittimzhe"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/external_plugins/jev-decisions"
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/external_plugins/jev-decisions"
     },
     {
       "name": "lark-cli",
@@ -134,7 +134,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/lark-cli",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/lark-cli",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/lark-cli/icon.png"
     },
     {
@@ -147,7 +147,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/libtv-cli",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/libtv-cli",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/libtv-cli/icon.png"
     },
     {
@@ -160,7 +160,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/obsidian",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/obsidian",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/obsidian/icon.png"
     },
     {
@@ -173,7 +173,7 @@
         "name": "liuzhiqiang23",
         "url": "https://github.com/liuzhiqiang23"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/external_plugins/ruic-card"
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/external_plugins/ruic-card"
     },
     {
       "name": "tencent-meeting-cli",
@@ -185,7 +185,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/tencent-meeting-cli",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/tencent-meeting-cli",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/tencent-meeting-cli/icon.png"
     },
     {
@@ -197,7 +197,7 @@
       "author": {
         "name": "Z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/unity",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/unity",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/unity/icon.png"
     },
     {
@@ -209,7 +209,7 @@
       "author": {
         "name": "Z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/unreal-engine",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/unreal-engine",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/unreal-engine/icon.png"
     },
     {
@@ -222,7 +222,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/video-agent-kit",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/video-agent-kit",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/video-agent/icon.png"
     },
     {
@@ -235,7 +235,7 @@
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/video2code",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/video2code",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/video2code/icon.png"
     },
     {
@@ -256,12 +256,12 @@
       "description": "基于 GitHub CLI 的 GitHub 工作流，覆盖提交、Pull Request、Issue、Release、Actions、仓库、Codespaces 等资源。",
       "source": "./plugins/github",
       "category": "developer-tools",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "author": {
         "name": "Z.ai",
         "url": "https://z.ai"
       },
-      "homepage": "https://github.com/zai-org/zcode-plugins/tree/d5690038b1e36293ee684a49de12ae41084e25e8/plugins/github",
+      "homepage": "https://github.com/zai-org/zcode-plugins/tree/0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9/plugins/github",
       "icon": "https://cdn-zcode.z.ai/zcode/official-plugin/assets/github/icon.png"
     }
   ]

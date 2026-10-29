@@ -201,6 +201,6 @@ tools/              # sync / analyze / compose / fetch-icons / build-site / read
 
 ## 上游与移除请求
 
-镜像基准固定在 `d5690038b1e36293ee684a49de12ae41084e25e8`（2026-10-27），每日 CI 跟进。上游为 Apache-2.0，本仓新增内容同样以 Apache-2.0 发布；`ZCode`、`Z.ai` 等名称仅作事实性指代，不暗示背书。
+镜像基准固定在 `0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9`（2026-10-29），每日 CI 跟进。上游为 Apache-2.0，本仓新增内容同样以 Apache-2.0 发布；`ZCode`、`Z.ai` 等名称仅作事实性指代，不暗示背书。
 
 完整来源声明、商标说明与**移除请求流程**见 [NOTICE.md](NOTICE.md)：指名路径，确认后 72 小时内删除。

@@ -115,6 +115,33 @@ if (!fs.existsSync(readmePath)) {
   console.error('[readme] README.md not found');
   process.exit(1);
 }
+
+// The pinned-upstream sentence in README and the NOTICE table quote the synced
+// commit by hand no more: any line whose context marks it as the mirror
+// baseline gets the current sha and upstream commit date here, so an upstream
+// bump cannot leave the prose describing the previous release.
+const SHA40 = /[0-9a-f]{40}/g;
+const DATE = /（\d{4}-\d{2}-\d{2}）/;
+const pinSha = (line) =>
+  /镜像基准|pinned to commit/.test(line)
+    ? line.replace(SHA40, portability.sha).replace(DATE, `（${portability.syncedAt.slice(0, 10)}）`)
+    : line;
+
+let pinned = 0;
+const applyPin = (file) => {
+  const p = path.join(ROOT, file);
+  if (!fs.existsSync(p)) return 0;
+  const before = fs.readFileSync(p, 'utf8');
+  const after = before.split('\n').map((l) => {
+    const next = pinSha(l);
+    if (next !== l) pinned++;
+    return next;
+  }).join('\n');
+  if (after !== before) writeText(p, after);
+};
+applyPin('README.md');
+applyPin('NOTICE.md');
+
 const readme = fs.readFileSync(readmePath, 'utf8');
 const start = readme.indexOf(BEGIN);
 const end = readme.indexOf(END);
@@ -123,9 +150,11 @@ if (start === -1 || end === -1) {
   process.exit(1);
 }
 const next = readme.slice(0, start) + block + readme.slice(end + END.length);
-if (next === readme) {
-  console.log(`[readme] matrix already current (${catalog.plugins.length} rows, sha ${portability.sha.slice(0, 9)})`);
-} else {
-  writeText(readmePath, next);
+if (next !== readme) writeText(readmePath, next);
+if (pinned) {
+  console.log(`[readme] pinned-commit refs updated (${pinned} line(s)) + matrix ${next !== readme ? 'rewritten' : 'already current'} (${catalog.plugins.length} rows, sha ${portability.sha.slice(0, 9)})`);
+} else if (next !== readme) {
   console.log(`[readme] matrix rewritten (${catalog.plugins.length} rows, sha ${portability.sha.slice(0, 9)})`);
+} else {
+  console.log(`[readme] matrix already current (${catalog.plugins.length} rows, sha ${portability.sha.slice(0, 9)})`);
 }

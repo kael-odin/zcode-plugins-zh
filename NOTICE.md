@@ -9,7 +9,7 @@
 | 仓库 | `zai-org/zcode-plugins` |
 | 分支 | `main` |
 | 许可 | Apache License 2.0（见 [LICENSE](LICENSE)，与上游逐字相同） |
-| 镜像基准提交 | `d5690038b1e36293ee684a49de12ae41084e25e8`（2026-10-27） |
+| 镜像基准提交 | `0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9`（2026-10-29） |
 
 `plugins/`、`external_plugins/` 下的插件源码**逐字保留**：本仓库不修改任何一个上游文件的内容，包括插件自身的 `.zcode-plugin/plugin.json` 与上游自带的 `.claude-plugin/plugin.json`。`tools/verify.mjs` 会逐文件比对 blob 哈希来守住这条约束。
 
@@ -43,7 +43,7 @@ Apache-2.0 不授予商标使用权。`ZCode`、`Z.ai` 及相关名称为其各�
 
 ## English summary
 
-This repository is a Chinese-language mirror and cross-agent port layer for [`zai-org/zcode-plugins`](https://github.com/zai-org/zcode-plugins) (Apache-2.0), pinned to commit `d5690038b1e36293ee684a49de12ae41084e25e8`.
+This repository is a Chinese-language mirror and cross-agent port layer for [`zai-org/zcode-plugins`](https://github.com/zai-org/zcode-plugins) (Apache-2.0), pinned to commit `0cc58d6aa29644f50af1d7ac2fa4c4eb7ada95d9`.
 
 Plugin source files are reproduced byte-for-byte and are never edited. What this repository adds: three marketplace indices (ZCode; Claude Code and Codex via `.agents/plugins/marketplace.json`, both carrying only the tiers that behave identically outside ZCode — the "clean" set), 28 generated `.claude-plugin/plugin.json` files for plugins upstream does not ship a Claude variant for (byte copies of the ZCode manifest), a searchable site with real icons and per-plugin portability verdicts, Chinese documentation, and the tooling that produces and verifies all of it. See [docs/codex-contract.md](docs/codex-contract.md) for the Codex-side evidence.
 
